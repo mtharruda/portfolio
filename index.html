@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matheus Arruda - Jornalista de dados / Analista de inteligência WEB</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <div class="terminal-prompt">
+                MatheusArruda@portfolio:~$ <span class="cursor">|</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">./about</a></li>
+                <li><a href="#experience">./experience</a></li>
+                <li><a href="#skills">./skills</a></li>
+                <li><a href="#projects">./projects</a></li>
+                <li><a href="#contact">./contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="data-grid"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <div class="terminal-title">data_analyst.py</div>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="code-line">
+                            <span class="line-number">1</span>
+                            <span class="code-content"><span class="comment"># -*- coding: utf-8 -*-</span></span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">2</span>
+                            <span class="code-content"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">3</span>
+                            <span class="code-content"><span class="keyword">from</span> journalist <span class="keyword">import</span> storytelling</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">4</span>
+                            <span class="code-content"></span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">5</span>
+                            <span class="code-content"><span class="keyword">class</span> <span class="function">DataJournalist</span>:</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">6</span>
+                            <span class="code-content">    <span class="keyword">def</span> <span class="function">__init__</span>(self):</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">7</span>
+                            <span class="code-content">        self.name = <span class="string">"Matheus Arruda"</span></span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">8</span>
+                            <span class="code-content">        self.role = <span class="string">"Data Analyst @ g1"</span></span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">9</span>
+                            <span class="code-content">        self.expertise = [<span class="string">"Python"</span>, <span class="string">"SQL"</span>, <span class="string">"Machine Learning"</span>, <span class="string">"DataViz"</span>]</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">10</span>
+                            <span class="code-content">        self.mission = <span class="string">"Transform data into stories"</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <section id="experience" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title">$ grep -r "experience" ./career/</div>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="experience-timeline">
+                    <div class="experience-item">
+                        <div class="experience-card">
+                            <h3>Data Analyst</h3>
+                            <div class="company">g1 - Globo News Portal</div>
+                            <div class="period">NOV 2024 - PRESENT</div>
+                            <p>Leading data intelligence initiatives in the WEB intelligence section. Developing advanced analytics for investigative journalism, processing government datasets, and creating interactive visualizations for high-impact national stories.</p>
+                            <p>Optimized content performance through data-driven SEO strategies. Implemented analytics frameworks for audience engagement measurement and developed automated reporting systems.</p>
+                        </div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="experience-card">
+                            <h3>Web Editor & Data Specialist</h3>
+                            <div class="company">g1 - Globo News Portal</div>
+                            <div class="period">SEP 2022 - NOV 2024</div>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="experience-card">
+                            <h3>Content Producer</h3>
+                            <div class="company">TV TEM - Globo</div>
+                            <div class="period">JAN 2020 - JUN 2022</div>
+                            <p>Produced data-driven content for television and digital platforms. Conducted statistical analysis for regional stories and developed visualization strategies for broadcast journalism.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title">$ python -c "print(skills.to_dict())"</div>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="skills-matrix">
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon"><i class="fas fa-code"></i></div>
+                            <h3>Data Manipulation</h3>
+                        </div>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <span>Python (Pandas, Polars)</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>SQL & NoSQL</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>Web Scraping</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>APIs & Automation</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+                            <h3>DataViz & Storytelling</h3>
+                        </div>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <span>Data Storytelling</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                </div>
+                            </div>
+                              <div class="skill-item">
+                                <span>Flourish Studio</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>Matplotlib & Seaborn</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>Power BI & Looker</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                            <h3>Machine Learning</h3>
+                        </div>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <span>Scikit-Learn</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                    <div class="skill-dot"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>NLP & Text Analysis</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>Predictive Analytics</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>Statistical Modeling</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                    <div class="skill-dot"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--PROJETOS-->
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title">$ ls -la ./projects/ | head -10</div>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="projects-grid">
+
+                    <!-- 1º post-->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-meta">
+                                <span class="project-date">JAN 2025</span>
+                                <span class="project-status status-published">Published</span>
+                            </div>
+                            <h3 class="project-title">Auditorium</h3>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description">
+                                Web application to help journalists find the perfect title via AI and predict total pageviews based on ML (Random Forest Regressor)
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Scikit-Learn</span>
+                                <span class="tech-tag">FuzzyWuzzy</span>
+                                <span class="tech-tag">Google Gemini API</span>      
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2º post-->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-meta">
+                                <span class="project-date">MAY 2025</span>
+                                <span class="project-status status-published">Published</span>
+                            </div>
+                            <h3 class="project-title">9mm pistols seizures in São Paulo, BR</h3>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description">
+                                9mm pistols represent more than half of the restricted-use weapons seized in SP. Article published on g1 in May 2025.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas & NumPy</span>  
+                                <span class="tech-tag">Flourish</span> 
+                                <span class="tech-tag">Gemini</span>  
+
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- 3º post-->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-meta">
+                                <span class="project-date">MAY 2025</span>
+                                <span class="project-status status-published">Published</span>
+                            </div>
+                            <h3 class="project-title">9mm pistols seizures in São Paulo, BR</h3>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description">
+                                9mm pistols represent more than half of the restricted-use weapons seized in SP. Article published on g1 in May 2025.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas & NumPy</span>  
+                                <span class="tech-tag">Flourish</span> 
+                                <span class="tech-tag">Gemini</span>  
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 4º post-->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-meta">
+                                <span class="project-date">MAY 2025</span>
+                                <span class="project-status status-published">Published</span>
+                            </div>
+                            <h3 class="project-title">9mm pistols seizures in São Paulo, BR</h3>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-description">
+                                9mm pistols represent more than half of the restricted-use weapons seized in SP. Article published on g1 in May 2025.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas & NumPy</span>  
+                                <span class="tech-tag">Flourish</span> 
+                                <span class="tech-tag">Gemini</span>  
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>         
