@@ -418,6 +418,9 @@
             a:link{
                 color: #5394ee;
             }
+            a:visited{
+                color: #5394ee;
+            }
         }
 
         .project-tech {
