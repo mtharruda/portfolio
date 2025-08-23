@@ -387,6 +387,11 @@
             color: #22c55e;
         }
 
+        .status-project {
+            background: #49687a;
+            color: #e2e8f0;
+        }
+
         .project-title {
             color: #e2e8f0;
             font-size: 16px;
@@ -403,6 +408,9 @@
             font-size: 13px;
             line-height: 1.5;
             margin-bottom: 16px;
+            a:link{
+                color: #5394ee;
+            }
         }
 
         .project-tech {
