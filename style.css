@@ -152,6 +152,13 @@
 
         .code-content {
             color: #e2e8f0;
+            a:link{
+                color: #5394ee;
+            }
+            a:visited{
+                color: #5394ee;
+            }
+
         }
 
         .keyword { color: #22c55e; }
@@ -511,6 +518,12 @@
         }
 
         /* Contact Section */
+         .contact {
+            background: #0f172a;
+            padding: 120px 0 0 300px;
+            position: relative;
+            overflow: hidden;
+        }
         .contact-terminal {
             background: rgba(30, 41, 59, 0.8);
             border: 1px solid #334155;
