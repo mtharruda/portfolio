@@ -165,8 +165,7 @@
 
         /* Main Content */
         .main-content {
-            background: linear-gradient(to bottom, #0f172a, #1e293b);
-            min-height: 100vh;
+            background: #0f172a;
         }
 
         .section {
