@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matheus Arruda - Analista de Dados</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 210mm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 35px 45px;
+        }
+        
+        .header h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -1px;
+        }
+        
+        .header .subtitle {
+            font-size: 17px;
+            color: #3498db;
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .contact-item a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        /* Main Content */
+        .content {
+            display: grid;
+            grid-template-columns: 0.9fr 2.1fr;
+            gap: 0;
+        }
+        
+        /* Left Sidebar */
+        .sidebar {
+            background: #ecf0f1;
+            padding: 35px 28px;
+        }
+        
+        .section {
+            margin-bottom: 32px;
+        }
+        
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #2c3e50;
+            margin-bottom: 14px;
+            padding-bottom: 7px;
+            border-bottom: 3px solid #3498db;
+            letter-spacing: 0.8px;
+        }
+        
+        .skill-item {
+            margin-bottom: 10px;
+        }
+        
+        .skill-name {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 3px;
+            color: #2c3e50;
+        }
+        
+        .skill-list {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .education-item {
+            margin-bottom: 16px;
+        }
+        
+        .education-degree {
+            font-weight: 600;
+            font-size: 13px;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+        
+        .education-school {
+            font-size: 12px;
+            color: #555;
+            font-style: italic;
+        }
+        
+        /* Right Main Content */
+        .main {
+            padding: 35px 45px;
+        }
+        
+        .profile-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #555;
+            text-align: justify;
+        }
+        
+        .experience-item {
+            margin-bottom: 28px;
+        }
+        
+        .job-header {
+            margin-bottom: 10px;
+        }
+        
+        .job-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .company-period {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-top: 2px;
+        }
+        
+        .impact-box {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 10px 14px;
+            margin: 10px 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .responsibilities {
+            list-style: none;
+            margin-top: 10px;
+        }
+        
+        .responsibilities li {
+            padding-left: 18px;
+            margin-bottom: 7px;
+            font-size: 13px;
+            line-height: 1.6;
+            position: relative;
+            color: #555;
+        }
+        
+        .responsibilities li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .tech-stack {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .tech-stack strong {
+            color: #2c3e50;
+        }
+        
+        .project-item {
+            margin-bottom: 20px;
+            border-left: 3px solid #3498db;
+            padding-left: 14px;
+        }
+        
+        .project-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 6px;
+        }
+        
+        .project-description {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .project-tech {
+            font-size: 11px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Matheus Arruda</h1>
+            <div class="subtitle">Dados | Data Viz | Web Analytics | Machine Learning</div>
+            <div class="contact-info">
+                <div class="contact-item">📞 (15) 99824-6352</div>
+                <div class="contact-item">✉️ arrudamthh@gmail.com</div>
+                <div class="contact-item"><a href="https://linkedin.com/in/matharruda">
+                    <img src="C:\Users\matheus.arruda\Documents\GitHub\portfolio_eng\imgs\logos\in-logo\in-logo\InBug-White.png" width="20" height="20" </a>
+                </div>
+                <div class="contact-item"><a href="https://github.com/mtharruda">
+                    <img src="C:\Users\matheus.arruda\Documents\GitHub\portfolio_eng\imgs\logos\github-mark\github-mark-white.svg" width="20" height="20" </a>
+            </div>
+                <div class="contact-item"><a href="https://mtharruda.github.io/portfolio">Portfolio</a></div>
+            </div>
+        </div>
+        
+        <!-- Main Content Grid -->
+        <div class="content">
+            <!-- Left Sidebar -->
+            <div class="sidebar">
+                <!-- Skills -->
+                <div class="section">
+                    <div class="section-title">Habilidades</div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">Linguagens</div>
+                        <div class="skill-list">Python, SQL</div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">Análise de dados & ML</div>
+                        <div class="skill-list">Pandas, Polars, NumPy, Scikit-learn</div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">Viz Data</div>
+                        <div class="skill-list">Power BI, Looker Studio, Matplotlib, Seaborn</div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-name">Ferramentas</div>
+                        <div class="skill-list">Google Analytics, Git, Excel Avançado, APIs REST</div>
+                    </div>
+                </div>
+                
+                <!-- Education -->
+                <div class="section">
+                    <div class="section-title">Formação</div>
+                    
+                    <div class="education-item">
+                        <div class="education-degree">Pós-graduação em Jornalismo de Dados</div>
+                        <div class="education-school">PUC Minas (em andamento)</div>
+                    </div>
+                    
+                    <div class="education-item">
+                        <div class="education-degree">Comunicação Social - Jornalismo</div>
+                        <div class="education-school">Esamc Sorocaba</div>
+                    </div>
+                </div>
+                
+                <!-- Differentials -->
+                <div class="section">
+                    <div class="section-title">Diferenciais</div>
+                    <div class="skill-list" style="line-height: 1.7;">
+                        • Storytelling com dados<br>
+                        • ML em produção<br>
+                        • Web analytics avançado<br>
+                        • Insights para decisões estratégicas
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Main Content -->
+            <div class="main">
+                <!-- Profile -->
+                <div class="section">
+                    <div class="section-title">Perfil</div>
+                    <p class="profile-text">
+                        Analista de dados com experiência em web analytics e machine learning. Desenvolvi modelos preditivos, dashboards e automações em Python que aumentaram audiência em +50% em portal de grande tráfego. Combino análise técnica com compreensão de comportamento de usuário e métricas de negócio.
+                    </p>
+                </div>
+                
+                <!-- Experience -->
+                <div class="section">
+                    <div class="section-title">Experiência</div>
+                    
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div class="job-title">Analista de Dados</div>
+                            <div class="company-period">g1 (Portal de notícias da Globo) • Nov/2024 - atualmente</div>
+                        </div>
+                        
+                        <div class="impact-box">
+                            📈 Aumentei audiência em +50% através de estratégias 'data-driven'
+                        </div>
+                        
+                        <ul class="responsibilities">
+                            <li>Desenvolvi <strong>modelo de ML</strong> que prediz audiência de conteúdo (classificação multi-classe) baseado em título, data e user needs</li>
+                            <li>Criei <strong>sistema de rastreamento completo</strong> (100% cobertura) permitindo decisões baseadas em padrões reais de engajamento</li>
+                            <li>Automatizei coleta via <strong>scrapers Python</strong> e desenvolvi <strong>dashboards</strong> para monitoramento de KPIs em tempo real</li>
+                        </ul>
+                        
+                        <div class="tech-stack">
+                            <strong>Stack:</strong> Python (Pandas, Polars, Scikit-learn), SQL, Power BI, Google Analytics
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div class="job-title">Editor Web</div>
+                            <div class="company-period">g1 (Portal Globo) • Set/2022 - Nov/2024</div>
+                        </div>
+                        
+                        <ul class="responsibilities">
+                            <li>Gerenciei publicação de conteúdo digital em portal de grande tráfego</li>
+                            <li>Produzi reportagens de jornalismo de dados, com uso de dados públicos via portais abertos, Lei de Acesso à Informação (LAI) e raspagens</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div class="job-title">Produtor</div>
+                            <div class="company-period">TV TEM (Afiliada Globo) • Jan/2020 - Jun/2022</div>
+                        </div>
+                        
+                        <ul class="responsibilities">
+                            <li>Produzi conteúdo jornalístico com foco em investigação e dados</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Projects -->
+                <div class="section">
+                    <div class="section-title">Projetos</div>
+                    
+                    <div class="project-item">
+                        <div class="project-title">Modelo Preditivo de audiência</div>
+                        <div class="project-description">
+                            ML em produção que classifica performance de conteúdo (alta/média/baixa) antes da publicação, auxiliando decisões editoriais estratégicas.
+                        </div>
+                        <div class="project-tech">Python • Scikit-learn • Feature Engineering • Em Produção</div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-title">Análise "Moneyball" Editorial</div>
+                        <div class="project-description">
+                            Identifiquei que afiliadas focadas em qualidade vs. quantidade geravam maior eficiência, desafiando métricas tradicionais e gerando redirecionamento estratégico.
+                        </div>
+                        <div class="project-tech">Python • SQL • Análise Exploratória • <a href="https://github.com/mtharruda/Moneyball">Ver metodologia</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
