@@ -579,3 +579,57 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Estilo das Badges de Tecnologia */
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+
+        .badge {
+            background-color: #2d3436; /* Fundo escuro elegante */
+            color: #00d2d3; /* Cor ciano que combina com seu portfólio */
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border: 1px solid #00d2d3;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Variante para destacar 'Em Produção' ou 'ML' */
+        .badge-special {
+            background-color: #00d2d3;
+            color: #1e272e;
+        }
+
+
+        .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 20px;
+        text-align: center;
+        margin-top: 30px;
+    }
+    .skill-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s;
+    }
+    .skill-item:hover {
+        transform: translateY(-5px);
+    }
+    .skill-item i {
+        font-size: 3rem; /* Tamanho do ícone */
+        margin-bottom: 10px;
+        color: #00d2d3; /* A cor ciano do seu tema */
+    }
+    .skill-item span {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
