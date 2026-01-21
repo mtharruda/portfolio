@@ -16,48 +16,68 @@
         <ul class="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#projetos">Projetos</a></li>
-            <li><a href="#sobre">Sobre</a></li>
             <li><a href="#contato">Contato</a></li>
             <li><a href="cv.html">CV</a></li>
         </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Matheus Arruda</h1>
-                    <div class="subtitle">Analista de Dados • Machine Learning • g1 • Globo</div>
-                    <p class="description">
-                        Analista de Dados especializado em Machine Learning e Web Analytics. 
-                        Desenvolvi modelos preditivos que aumentaram audiência em +50% em portal de grande tráfego. 
-                    </p>                   
-                    
-                    <div class="hero-cta">
-                        <a href="#projetos" class="btn btn-primary">
-                            <i class="fas fa-chart-line"></i>
-                            Ver projetos
-                        </a>
-                        <a href="#sobre" class="btn btn-secondary">
-                            <i class="fas fa-user"></i>
-                            Sobre mim
-                        </a>
+    <section class="hero-consolidated" id="home">
+    <div class="container">
+        
+        <div class="hero-header">
+            <h1>Matheus Arruda</h1>
+            <div class="subtitle">Analista de Dados • Machine Learning • g1 • Globo</div>
+        </div>
+
+        <div class="about-flex-container">
+            
+            <div class="code-column">
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
                     </div>
-                </div>
-                
-                <div class="hero-viz glass">
-                    <div class="data-viz">
-                        <div class="viz-circle"></div>
-                        <div class="viz-circle"></div>
-                        <div class="viz-dots">
-                            <i class="fas fa-database"></i>
-                        </div>
+                    <div class="code-content">
+                        <pre>
+<span class="code-keyword">class</span> <span class="code-func">MatheusArruda</span>:
+    <span class="code-keyword">def</span> <span class="code-func">__init__</span>(self):
+        self.role = <span class="code-string">"Analista de Dados & ML"</span>
+        self.focus = [<span class="code-string">"Analytics"</span>, <span class="code-string">"ROI"</span>]
+        self.impact = <span class="code-string">"+50% audiência"</span>
+
+    <span class="code-keyword">def</span> <span class="code-func">solve</span>(self, data):
+        <span class="code-keyword">return</span> <span class="code-string">"Insights Acionáveis"</span>
+
+me = MatheusArruda()</pre>
                     </div>
                 </div>
             </div>
+
+            <div class="text-column">
+                <h2>Dados e Storytelling</h2>
+                <p>
+                    Especialista em converter grandes volumes de dados em estratégias de crescimento. 
+                    No <strong>g1 (Globo)</strong>, desenvolvi modelos de Machine Learning em produção 
+                    e automações que impulsionaram a audiência em <strong>+50%</strong>.
+                </p>
+                <p>
+                    Minha abordagem une o rigor estatístico com a visão de negócio, focando em 
+                    <strong>ROI operacional</strong> e precisão analítica.
+                </p>
+
+                <div class="skills-mini-grid">
+                    <div class="skill-item"><i class="devicon-python-plain"></i><span>Python</span></div>
+                    <div class="skill-item"><i class="devicon-azuresqldatabase-plain"></i><span>SQL</span></div>
+                    <div class="skill-item"><i class="devicon-scikitlearn-plain"></i><span>Scikit-Learn</span></div>
+                    <div class="skill-item"><i class="devicon-googlecloud-plain"></i><span>BigQuery</span></div>
+                    <div class="skill-item"><i class="devicon-pandas-plain"></i><span>Pandas</span></div>
+                    <div class="skill-item"><i class="devicon-git-plain"></i><span>Git</span></div>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Projects Section -->
     <section class="projects" id="projetos">
@@ -163,65 +183,7 @@
             </div>
         </div>
     </section>
-
-    <!-- About Section -->
-    <section class="about" id="sobre">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-avatar glass">
-                    <i class="fas fa-user"></i>
-                </div>
-                
-                <div class="about-text animate-in">
-                    <h3> Dados e storytelling </h3>
-                    <p>
-                        Analista de Dados com 1 ano de experiência em Machine Learning e 
-                        Web Analytics. Trabalho no setor de inteligência digital do G1 
-                        (portal Globo), onde desenvolvo modelos preditivos, dashboards e 
-                        automações que aumentaram audiência em +30%.
-
-                        Combino expertise técnica (Python, SQL, ML) com compreensão profunda 
-                        de comportamento de audiência e métricas de negócio. Formação em 
-                        Comunicação com pós-graduação em Jornalismo de Dados (PUC Minas).
-
-                        Meu objetivo é transformar dados complexos em insights acionáveis 
-                        que geram impacto mensurável.
-                    </p>
-                    <p>
-                        Meu objetivo é transformar dados complexos em histórias compreensíveis, 
-                        sempre priorizando precisão analítica e impacto social das descobertas.
-                    </p>
-                    <div class="skills-grid">
-                        <div class="skill-item">
-                            <i class="devicon-python-plain"></i>
-                            <span>Python</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-pandas-plain"></i>
-                            <span>Pandas</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-azuresqldatabase-plain"></i>
-                            <span>SQL</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-scikitlearn-plain"></i>
-                            <span>Scikit-Learn</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-googlecloud-plain"></i>
-                            <span>BigQuery</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-git-plain"></i>
-                            <span>Git</span>
-                        </div>
-                    </div>   
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Contact Section -->
     <section class="contact" id="contato">
         <div class="container">
