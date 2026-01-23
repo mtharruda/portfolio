@@ -481,7 +481,7 @@
 
         .contact-links {
             display: flex;
-            justify-content: center;
+            justify-content: left;
             gap: 1.5rem;
             margin-top: 3rem;
         }
@@ -507,8 +507,8 @@
         }
 
         .contact-icon {
-            width: 24px;
-            height: 24px;
+            width: 15px;
+            height: 15px;
             color: var(--accent-primary);
         }
 
@@ -618,7 +618,7 @@
     .skill-item {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: left;
         transition: transform 0.3s;
     }
     .skill-item:hover {
@@ -629,9 +629,11 @@
         margin-bottom: 10px;
         color: #00d2d3; /* A cor ciano do seu tema */
     }
+
     .skill-item span {
         font-size: 0.9rem;
         font-weight: 500;
+        text-align: left;
     }
 
     .code-window {
@@ -708,6 +710,7 @@
     line-height: 1.6;
     margin-bottom: 15px;
     color: #ccc;
+    text-align: justify;
 }
 
 
@@ -730,6 +733,7 @@
 
 .text-column {
     flex: 1; /* Ocupa 50% */
+    text-align: justify;
 }
 
 .skills-mini-grid {
