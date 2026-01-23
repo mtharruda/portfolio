@@ -311,15 +311,6 @@
             }
             type();
         }
-
-        // Initialize typing effect on load
-        window.addEventListener('load', () => {
-            const heroTitle = document.querySelector('.hero-text h1');
-            if (heroTitle) {
-                typeWriter(heroTitle, 'Matheus Arruda', 120);
-            }
-        });
-
         // Smooth reveal animations with stagger
         const staggerElements = document.querySelectorAll('.project-card');
         staggerElements.forEach((el, index) => {
