@@ -472,11 +472,13 @@
         .contact {
             padding: 6rem 0;
             text-align: center;
+            position: center;
         }
 
         .contact-content {
             max-width: 800px;
             margin: 0 auto;
+            padding-left: 100px;
         }
 
         .contact-links {
