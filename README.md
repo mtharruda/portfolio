@@ -1,10 +1,18 @@
-# portfolio_eng
-Portfólio - Matheus Arruda
-
 # 👨‍💻 Matheus Arruda 
-### Jornalista e analista de dados 
+### Analista de dados 
 
-👋 Olá! Me chamo Matheus, sou jornalista e analista de inteligência WEB no **g1**, o portal de notícias da Globo. Tenho experiência em análise exploratória, visualização e jornalismo de dados. **Meu objetivo é ajudar organizações e o público a compreender o mundo através dos números.**
+Olá! Sou analista de dados no **g1** (portal da Globo), especializado em **web analytics**, **machine learning** e **automação de dados**.
+### 🛠️ Stack Principal
+
+**Análise de Dados:** Python (Pandas, Polars, NumPy), SQL, Excel Avançado  
+**Machine Learning:** Scikit-learn, modelos preditivos, classificação  
+**Visualização:** Power BI, Looker Studio, Matplotlib, Seaborn, Flourish  
+**Automação:** Web scraping, APIs, automação de coleta de dados
+
+**Resultados recentes:**
+- 📈 Aumentei audiência do portal em **+30%** através de estratégias data-driven
+- 🤖 Desenvolvi modelo de ML em produção para predição de performance de conteúdo
+- 📊 Criei sistema de rastreamento completo de métricas digitais
 
 **📚 Educação**
 <br>
@@ -21,15 +29,36 @@ Portfólio - Matheus Arruda
 - Análise exploratória de dados: Python (Pandas, Polars), SQL <br>
 - Visualização de Dados: (Matplotlib, Seaborn, Flourish, Google Looker Studio, MS Power BI) <br>
 
-## O que fiz e como fiz
-### [Desaparecido político mais jovem do país e estudante torturado até a morte: mapa conta história de sorocabanos vítimas da ditadura](https://g1.globo.com/sp/sorocaba-jundiai/noticia/2025/01/27/desaparecido-politico-mais-jovem-do-pais-e-estudante-torturado-ate-a-morte-mapa-conta-historia-de-sorocabanos-vitimas-da-ditadura.ghtml)
-*Reportagem publicada no **g1**, em janeiro de 2025* <br>
-Com base no Relatório Final da Comissão da Verdade, automatizei via **Google Gemini** a extração do local de nascimento e local de morte para a produção do mapa. A visualização, por sua vez, foi finalizada no Flourish. 
-### [Mais de 40 pessoas são procuradas pela Justiça há pelos menos dez anos na região de Sorocaba, indicam dados do CNJ](https://g1.globo.com/sp/sorocaba-jundiai/noticia/2024/12/09/mais-de-40-pessoas-sao-procuradas-pela-justica-ha-pelos-menos-dez-anos-na-regiao-de-sorocaba-indicam-dados-do-cnj.ghtml)
-*Reportagem publicada no **g1**, em dezembro de 2024.* <br>
-Automatização via Python, utilizando o Selenium, de buscas no sistema do Conselho Nacional de Justiça por nome. Para análise, biblioteca Pandas, e gráficos produzidos no Flourish. [Código]([url](https://github.com/mtharruda/bnmp-scraper)) disponibilizado após publicação. 
+## 🚀 Projetos em Destaque
 
-## Onde me encontrar?
+### 🎯 [Modelo Preditivo de Audiência Web] *(em breve)*
+Sistema de machine learning que prediz performance de conteúdo antes da publicação
+- **Status:** Em produção
+- **Impacto:** Auxilia decisões editoriais baseadas em dados
+- **Tech:** Python, Scikit-learn, Pandas
+
+### 📊 [Dashboard de Inteligência de Audiência] *(em breve)*
+Sistema automatizado de análise de métricas em tempo real
+- **Impacto:** +30% de crescimento de audiência
+- **Tech:** Python, SQL, Power BI, Google Analytics API
+
+### 🔍 Projetos de Jornalismo de Dados
+
+#### [bnmp-scraper](https://github.com/mtharruda/bnmp-scraper)
+Automação para raspagem do Banco Nacional de Medidas Penais (BNMP)
+- **Tech:** Python, web scraping
+
+#### [BuscaProposta](https://github.com/mtharruda/BuscaProposta)
+Analisador sintático de planos de governo - Eleições 2024
+- **Tech:** Python, NLP
+
+#### [TJ_Scrapers](https://github.com/mtharruda/TJ_Scrapers)
+Raspagem de informações do TJSP
+- **Tech:** Python, web scraping
+
+[Portfólio](https://mtharruda.github.io/portfolio/)
+
+## Quer entrar em contato comigo?
 [E-mail](arrudamthh@gmail.com)<br>
 [Linkedin](https://www.linkedin.com/in/matharruda/)<br>
 [Instagram](https://www.instagram.com/arrudamth/)<br>
