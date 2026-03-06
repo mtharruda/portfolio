@@ -242,7 +242,6 @@
     padding-top: 6px;
     letter-spacing: .05em;
   }
-  .project-main {}
   .project-title {
     font-family: var(--display);
     font-size: clamp(28px, 3.5vw, 46px);
@@ -421,7 +420,6 @@
     padding: 40px 0;
     border-bottom: 1px solid var(--faint);
   }
-  .exp-left {}
   .exp-period {
     font-family: var(--mono);
     font-size: 10px;
@@ -437,7 +435,6 @@
     letter-spacing: .08em;
     color: var(--muted);
   }
-  .exp-right {}
   .exp-role {
     font-family: var(--display);
     font-size: clamp(22px, 2.5vw, 34px);
@@ -569,7 +566,7 @@
 
 <!-- Hero -->
 <div class="hero">
-  <div class="hero-bg-text">DATA</div>
+  <div class="hero-bg-text"></div>
   <p class="hero-tag">Data Analyst &amp; Storyteller — São Paulo, BR</p>
   <h1 class="hero-title">
     Numbers that<br>
@@ -610,7 +607,6 @@
     <div class="project-meta">
       <span class="project-date">Jan 2025</span>
       <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
     </div>
   </a>
 
@@ -628,7 +624,6 @@
     <div class="project-meta">
       <span class="project-date">Aug 2025</span>
       <span class="project-status">Study</span>
-      <span class="project-arrow">↗</span>
     </div>
   </a>
 
@@ -646,27 +641,27 @@
     <div class="project-meta">
       <span class="project-date">Aug 2025</span>
       <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
     </div>
   </a>
 
-  <a class="project-row reveal" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2025/05/02/pistolas-9mm-representam-mais-da-metade-das-armas-de-uso-restrito-apreendidas-em-sp-desejada-pelo-crime-alerta-especialista.ghtml" target="_blank">
-    <span class="project-num">04</span>
-    <div class="project-main">
-      <h2 class="project-title">9mm Pistol Seizures in São Paulo</h2>
-      <p class="project-desc">Investigation showing that 9mm pistols represent more than half of all restricted-use weapons seized in the state of São Paulo, with expert analysis.</p>
-      <div class="project-tags">
-        <span class="tag">Python</span>
-        <span class="tag">Flourish</span>
-        <span class="tag">Gemini</span>
+  <div class="card" onclick="openModal()">
+    <a class="project-row reveal" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2025/05/02/pistolas-9mm-representam-mais-da-metade-das-armas-de-uso-restrito-apreendidas-em-sp-desejada-pelo-crime-alerta-especialista.ghtml" target="_blank">
+      <span class="project-num">04</span>
+      <div class="project-main">
+        <h2 class="project-title">9mm Pistol Seizures in São Paulo</h2>
+        <p class="project-desc">Investigation showing that 9mm pistols represent more than half of all restricted-use weapons seized in the state of São Paulo, with expert analysis.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Flourish</span>
+          <span class="tag">Gemini</span>
+        </div>
       </div>
-    </div>
-    <div class="project-meta">
-      <span class="project-date">May 2025</span>
-      <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
-    </div>
-  </a>
+      <div class="project-meta">
+        <span class="project-date">May 2025</span>
+        <span class="project-status">Published</span>
+      </div>
+    </a>
+  </div>
 
   <a class="project-row reveal" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2024/11/18/sem-escolas-e-hospitais-mais-de-12-mil-pessoas-vivem-nas-favelas-de-sorocaba-veja-mapa.ghtml" target="_blank">
     <span class="project-num">05</span>
@@ -682,7 +677,6 @@
     <div class="project-meta">
       <span class="project-date">Nov 2024</span>
       <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
     </div>
   </a>
 
@@ -700,7 +694,6 @@
     <div class="project-meta">
       <span class="project-date">Apr 2024</span>
       <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
     </div>
   </a>
 
@@ -718,7 +711,6 @@
     <div class="project-meta">
       <span class="project-date">Dec 2024</span>
       <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
     </div>
   </a>
 
@@ -736,7 +728,6 @@
     <div class="project-meta">
       <span class="project-date">Apr 2024</span>
       <span class="project-status">Personal</span>
-      <span class="project-arrow">↗</span>
     </div>
   </a>
 </section>
@@ -752,7 +743,7 @@
       I transform raw data into<br>
       <em>narratives that matter</em> —<br>
       where journalism meets<br>
-      machine learning.
+      data.
     </div>
     <div class="about-right">
       <div class="reveal">
@@ -838,9 +829,9 @@
     </h2>
     <div class="contact-links reveal">
       <a class="contact-link" href="mailto:arrudamthh@gmail.com">Email</a>
-      <a class="contact-link" href="https://linkedin.com/in/mtharruda" target="_blank">LinkedIn</a>
+      <a class="contact-link" href="https://linkedin.com/in/matharruda" target="_blank">LinkedIn</a>
       <a class="contact-link" href="https://github.com/mtharruda" target="_blank">GitHub</a>
-      <a class="contact-link" href="https://mtharruda.github.io/portfolio/cv_eng.html" target="_blank">CV / Résumé</a>
+      <a class="contact-link" href="matheus_arruda_cv.html" target="_blank">Résumé</a>
     </div>
   </div>
 </section>
