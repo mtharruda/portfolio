@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -224,16 +226,32 @@
     transition: background .25s;
     text-decoration: none;
     color: inherit;
+    background: none !important;
+    background-color: transparent !important;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    overflow: hidden; /* Garante que o ::before não escape */
   }
+  
   .project-row::before {
     content: '';
     position: absolute;
-    left: -48px; right: -48px; top: 0; bottom: 0;
-    background: var(--faint);
+    left: 0; 
+    right: 0; 
+    top: 0; bottom: 0;
+    background: var(--cream);
     opacity: 0;
     transition: opacity .3s;
+    z-index: 0;  /* Adicione isso para garantir que fique atrás do texto */
   }
-  .project-row:hover::before { opacity: 1; }
+  .project-row:hover::before { opacity: 0.03; }
 
   .project-num {
     font-family: var(--mono);
@@ -242,7 +260,6 @@
     padding-top: 6px;
     letter-spacing: .05em;
   }
-  .project-main {}
   .project-title {
     font-family: var(--display);
     font-size: clamp(28px, 3.5vw, 46px);
@@ -309,19 +326,38 @@
     opacity: .7;
     display: block;
   }
-  .project-arrow {
-    font-size: 18px;
-    color: var(--warm);
-    opacity: 0;
-    transition: opacity .25s, transform .25s;
-    margin-top: 4px;
-    display: block;
-    transform: rotate(-45deg) translate(-4px, 4px);
+
+  /* MODAL */
+  .modal-overlay {
+    position:fixed; inset:0; z-index:1000;
+    background:rgba(12,11,9,0.9); backdrop-filter:blur(14px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .4s cubic-bezier(.16,1,.3,1);
+    cursor:none; padding:24px;
   }
-  .project-row:hover .project-arrow {
-    opacity: 1;
-    transform: rotate(-45deg) translate(0,0);
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+  .modal {
+    background:#131210; border:1px solid rgba(237,232,223,0.1);
+    width:min(860px,94vw); max-height:90vh; overflow-y:auto;
+    position:relative; transform:translateY(32px) scale(.97);
+    transition:transform .45s cubic-bezier(.16,1,.3,1); scrollbar-width:none;
   }
+  .modal::-webkit-scrollbar { display:none; }
+  .modal-overlay.open .modal { transform:translateY(0) scale(1); }
+  .modal-header { padding:40px 48px 24px; border-bottom:1px solid rgba(237,232,223,0.07); display:flex; justify-content:space-between; align-items:flex-start; gap:24px; }
+  .modal-title { font-family:var(--display); font-size:clamp(26px,4vw,44px); font-weight:300; line-height:1; letter-spacing:-.02em; }
+  .modal-close { background:none; border:none; cursor:none; font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); padding:6px 0 6px 16px; transition:color .2s; flex-shrink:0; margin-top:8px; }
+  .modal-close:hover { color:var(--warm); }
+  .modal-body { padding:32px 48px 48px; }
+  .modal-desc { font-family:var(--sans); font-size:14px; color:var(--muted); line-height:1.8; max-width:580px; margin-bottom:32px; }
+  .modal-insight { font-family:var(--display); font-size:clamp(17px,2.2vw,24px); font-weight:300; line-height:1.3; color:var(--cream); font-style:italic; border-left:2px solid var(--warm); padding-left:20px; margin-bottom:32px; }
+  .modal-chart-wrap { position:relative; width:100%; background:rgba(237,232,223,0.02); border:1px solid rgba(237,232,223,0.06); padding:36px 20px 20px; margin-bottom:28px; }
+  .modal-chart-label { font-family:var(--mono); font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--warm); opacity:.7; position:absolute; top:13px; left:20px; }
+  .modal-chart-wrap canvas { max-height:300px; }
+  .modal-tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
+  .modal-link { display:inline-flex; align-items:center; gap:10px; font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--cream); opacity:.5; text-decoration:none; transition:opacity .2s,color .2s; border-bottom:1px solid rgba(237,232,223,0.15); padding-bottom:4px; }
+  .modal-link:hover { opacity:1; color:var(--warm); border-color:var(--warm); }
+  .modal-link::after { content:'↗'; }
 
   /* ── ABOUT ───────────────────────────────────── */
   #about {
@@ -421,7 +457,6 @@
     padding: 40px 0;
     border-bottom: 1px solid var(--faint);
   }
-  .exp-left {}
   .exp-period {
     font-family: var(--mono);
     font-size: 10px;
@@ -437,7 +472,6 @@
     letter-spacing: .08em;
     color: var(--muted);
   }
-  .exp-right {}
   .exp-role {
     font-family: var(--display);
     font-size: clamp(22px, 2.5vw, 34px);
@@ -526,7 +560,7 @@
     from { transform: scaleX(0); }
     to   { transform: scaleX(1); }
   }
-
+  
   /* Scroll reveal */
   .reveal {
     opacity: 0;
@@ -534,6 +568,49 @@
     transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── HOVER PREVIEW CARD ──────────────────────── */
+  .preview-card {
+    position: fixed;
+    width: 220px;
+    background: #1a1814;
+    border: 1px solid rgba(201,169,110,0.2);
+    padding: 16px;
+    pointer-events: none;
+    z-index: 500;
+    opacity: 0;
+    transform: translateY(8px) scale(.97);
+    transition: opacity .22s cubic-bezier(.16,1,.3,1), transform .22s cubic-bezier(.16,1,.3,1);
+  }
+  .preview-card.visible { opacity: 1; transform: translateY(0) scale(1); }
+  .preview-label {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--warm);
+    opacity: .7;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .preview-svg-wrap { width: 198px; height: 84px; overflow: hidden; }
+  .preview-svg-wrap svg { width: 198px; height: 84px; }
+  .preview-stat {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--warm);
+    line-height: 1;
+    margin-top: 10px;
+  }
+  .preview-stat-label {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: .12em;
+    color: rgba(237,232,223,0.35);
+    margin-top: 4px;
+    display: block;
+  }
 
   /* ── RESPONSIVE ──────────────────────────────── */
   @media (max-width: 768px) {
@@ -556,20 +633,30 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
+<!-- Hover Preview Card -->
+<div class="preview-card" id="previewCard">
+  <span class="preview-label" id="previewLabel"></span>
+  <div class="preview-svg-wrap">
+    <svg id="previewSvg" viewBox="0 0 198 84" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+  <div class="preview-stat" id="previewStat"></div>
+  <span class="preview-stat-label" id="previewStatLabel"></span>
+</div>
+
 <!-- Nav -->
 <nav>
   <a href="#" class="nav-logo">Matheus Arruda</a>
   <ul class="nav-links">
-    <li><a href="#projects">Work</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#projects">Projetos</a></li>
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#experience">Experiência</a></li>
+    <li><a href="#contact">Contato</a></li>
   </ul>
 </nav>
 
 <!-- Hero -->
 <div class="hero">
-  <div class="hero-bg-text">DATA</div>
+  <div class="hero-bg-text"></div>
   <p class="hero-tag">Data Analyst &amp; Storyteller — São Paulo, BR</p>
   <h1 class="hero-title">
     Numbers that<br>
@@ -577,8 +664,8 @@
   </h1>
   <div class="hero-bottom">
     <p class="hero-role">
-      Data Analyst @ g1 — Globo News Portal<br>
-      Python · DataViz · Machine Learning · Power BI
+      Analista de dados @ g1 - Globo <br>
+      Python & SQL · Visualização de dados · Machine Learning · BI
     </p>
     <div class="hero-scroll">
       <div class="hero-scroll-line"></div>
@@ -590,16 +677,15 @@
 <!-- Projects -->
 <section id="projects">
   <div class="section-header reveal">
-    <span class="section-label">Selected Work</span>
+    <span class="section-label">Projetos de destaque</span>
     <div class="section-line"></div>
-    <span class="section-count">08 Projects</span>
   </div>
 
   <a class="project-row reveal" href="https://github.com/mtharruda/Auditorium/blob/main/README.md" target="_blank">
     <span class="project-num">01</span>
     <div class="project-main">
       <h2 class="project-title">Auditorium</h2>
-      <p class="project-desc">Web application to help journalists find the perfect headline via AI and predict total pageviews using Machine Learning (Random Forest Regressor).</p>
+      <p class="project-desc">Aplicação para ajudar jornalistas a encontrar títulos eficientes por meio de um algoritmo treinado e Inteligência Artificial generativa.</p>
       <div class="project-tags">
         <span class="tag">Python</span>
         <span class="tag">Scikit-Learn</span>
@@ -609,30 +695,24 @@
     </div>
     <div class="project-meta">
       <span class="project-date">Jan 2025</span>
-      <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
+      <span class="project-status">Em produção</span>
     </div>
   </a>
-
-  <a class="project-row reveal" href="https://github.com/mtharruda/Moneyball" target="_blank">
+  
+  <!-- 02–08 → modais -->
+  <button class="project-row reveal" data-modal="modal-moneyball">
     <span class="project-num">02</span>
     <div class="project-main">
-      <h2 class="project-title">How to Win an Unfair Game?</h2>
-      <p class="project-desc">Simulation of the strategies and data analysis used by Paul DePodesta with the Oakland Athletics in 2001 — the Moneyball approach.</p>
-      <div class="project-tags">
-        <span class="tag">Python</span>
-        <span class="tag">Pandas</span>
-        <span class="tag">Linear Regression</span>
-      </div>
+      <h2 class="project-title">Como vencer um jogo injusto?</h2>
+      <p class="project-desc">Simulação das estratégias e análise de dados usadas por Paul DePodesta com o Oakland Athletics em 2001.</p>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Linear Regression</span></div>
     </div>
-    <div class="project-meta">
-      <span class="project-date">Aug 2025</span>
-      <span class="project-status">Study</span>
-      <span class="project-arrow">↗</span>
+    <div class="project-meta"><span class="project-date">Aug 2025</span>
+      <span class="project-status">Estudo</span>
     </div>
-  </a>
+  </button>
 
-  <a class="project-row reveal" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2025/10/16/mapa-uma-em-cada-duas-farmacias-municipais-de-sorocaba-esta-com-quase-metade-do-estoque-de-medicamentos-zerado.ghtml" target="_blank">
+  <button class="project-row reveal" data-modal="modal-pharma">
     <span class="project-num">03</span>
     <div class="project-main">
       <h2 class="project-title">Municipal Pharmacies Shortage</h2>
@@ -646,11 +726,10 @@
     <div class="project-meta">
       <span class="project-date">Aug 2025</span>
       <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
     </div>
-  </a>
+  </button>
 
-  <a class="project-row reveal" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2025/05/02/pistolas-9mm-representam-mais-da-metade-das-armas-de-uso-restrito-apreendidas-em-sp-desejada-pelo-crime-alerta-especialista.ghtml" target="_blank">
+  <button class="project-row reveal" data-modal="modal-9mm">
     <span class="project-num">04</span>
     <div class="project-main">
       <h2 class="project-title">9mm Pistol Seizures in São Paulo</h2>
@@ -664,11 +743,10 @@
     <div class="project-meta">
       <span class="project-date">May 2025</span>
       <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
     </div>
-  </a>
+  </button>
 
-  <a class="project-row reveal" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2024/11/18/sem-escolas-e-hospitais-mais-de-12-mil-pessoas-vivem-nas-favelas-de-sorocaba-veja-mapa.ghtml" target="_blank">
+  <button class="project-row reveal" data-modal="modal-favelas">
     <span class="project-num">05</span>
     <div class="project-main">
       <h2 class="project-title">Life in Sorocaba's Favelas</h2>
@@ -682,11 +760,10 @@
     <div class="project-meta">
       <span class="project-date">Nov 2024</span>
       <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
     </div>
-  </a>
+  </button>
 
-  <a class="project-row reveal" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2024/04/01/bairros-com-maior-numero-de-vitimas-de-violencia-domestica-ficam-em-media-a-13km-da-ddm-de-sorocaba-veja-mapa.ghtml" target="_blank">
+  <button class="project-row reveal" data-modal="modal-dv">
     <span class="project-num">06</span>
     <div class="project-main">
       <h2 class="project-title">Distance from Domestic Violence Victims to Police</h2>
@@ -700,11 +777,10 @@
     <div class="project-meta">
       <span class="project-date">Apr 2024</span>
       <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
     </div>
-  </a>
+  </button>
 
-  <a class="project-row reveal" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2024/12/09/mais-de-40-pessoas-sao-procuradas-pela-justica-ha-pelos-menos-dez-anos-na-regiao-de-sorocaba-indicam-dados-do-cnj.ghtml" target="_blank">
+  <button class="project-row reveal" data-modal="modal-wanted">
     <span class="project-num">07</span>
     <div class="project-main">
       <h2 class="project-title">40+ People Wanted for 10+ Years</h2>
@@ -718,11 +794,10 @@
     <div class="project-meta">
       <span class="project-date">Dec 2024</span>
       <span class="project-status">Published</span>
-      <span class="project-arrow">↗</span>
     </div>
-  </a>
+  </button>
 
-  <a class="project-row reveal" href="#" target="_blank">
+  <button class="project-row reveal" data-modal="modal-music">
     <span class="project-num">08</span>
     <div class="project-main">
       <h2 class="project-title">Is My Music Really Sad?</h2>
@@ -736,9 +811,8 @@
     <div class="project-meta">
       <span class="project-date">Apr 2024</span>
       <span class="project-status">Personal</span>
-      <span class="project-arrow">↗</span>
     </div>
-  </a>
+  </button>
 </section>
 
 <!-- About -->
@@ -752,7 +826,7 @@
       I transform raw data into<br>
       <em>narratives that matter</em> —<br>
       where journalism meets<br>
-      machine learning.
+      data.
     </div>
     <div class="about-right">
       <div class="reveal">
@@ -837,21 +911,194 @@
       <em>meaningful.</em>
     </h2>
     <div class="contact-links reveal">
-      <a class="contact-link" href="mailto:matheus@email.com">Email</a>
-      <a class="contact-link" href="https://linkedin.com/in/mtharruda" target="_blank">LinkedIn</a>
+      <a class="contact-link" href="arrudamthh@gmail.com">Email</a>
+      <a class="contact-link" href="https://linkedin.com/in/matharruda" target="_blank">LinkedIn</a>
       <a class="contact-link" href="https://github.com/mtharruda" target="_blank">GitHub</a>
-      <a class="contact-link" href="https://mtharruda.github.io/portfolio/cv_eng.html" target="_blank">CV / Résumé</a>
+      <a class="contact-link" href="matheus_arruda_cv.html" target="_blank">Résumé</a>
     </div>
   </div>
 </section>
 
 <!-- Footer -->
 <footer>
-  <span>© 2025 Matheus Arruda</span>
+  <span>© 2026 Matheus Arruda</span>
   <span>Data Analyst — São Paulo, BR</span>
 </footer>
 
-<script>
+<!-- ═══════════════════════ MODALS ═══════════════════════ -->
+
+<div class="modal-overlay" id="modal-moneyball">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title">How to Win<br>an Unfair Game?</h2>
+      <button class="modal-close" data-close>Close ✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc">Simulation of Paul DePodesta's data strategy with the Oakland Athletics in 2001. The team had the 3rd-lowest payroll in MLB but won 102 games — more than the Yankees, who spent 3× more.</p>
+      <div class="modal-insight">"OBP prediz vitórias melhor que payroll. Oakland provou isso em 2001 com a 3ª menor folha da MLB."</div>
+      <div class="modal-chart-wrap">
+        <span class="modal-chart-label">OBP vs. Vitórias — MLB (dados reais) + regressão linear</span>
+        <canvas id="chart-moneyball"></canvas>
+      </div>
+      <div class="modal-tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Scikit-Learn</span><span class="tag">Linear Regression</span></div>
+      <a class="modal-link" href="https://github.com/mtharruda/Moneyball" target="_blank">View on GitHub</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-pharma">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title">Municipal Pharmacies<br>Shortage</h2>
+      <button class="modal-close" data-close>Close ✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc">Analysis of medication stock data across Sorocaba's municipal pharmacy network. 1 in every 2 units had nearly 50% of its total stock completely depleted at the time of the report.</p>
+      <div class="modal-insight">"UBS Aparecidinha: 139 medicamentos em falta — 50,5% do estoque total."</div>
+      <div class="modal-chart-wrap" style="padding:16px 16px 0;">
+        <span class="modal-chart-label">Top 5 farmácias com maior falta de estoque</span>
+        <div style="margin-top:24px;"><iframe src="https://flo.uri.sh/visualisation/25071435/embed" frameborder="0" scrolling="no" style="width:100%;height:380px;border:none;" allowfullscreen></iframe></div>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:20px;">
+        <thead><tr style="border-bottom:1px solid rgba(237,232,223,0.1);">
+          <th style="text-align:left;padding:8px 0;color:rgba(201,169,110,0.7);letter-spacing:.15em;font-weight:400;">FARMÁCIA</th>
+          <th style="text-align:right;padding:8px 0;color:rgba(201,169,110,0.7);letter-spacing:.15em;font-weight:400;">ITENS EM FALTA</th>
+          <th style="text-align:right;padding:8px 0;color:rgba(201,169,110,0.7);letter-spacing:.15em;font-weight:400;">DO ESTOQUE</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(237,232,223,0.05);"><td style="padding:10px 0;color:rgba(237,232,223,0.7);">UBS Aparecidinha</td><td style="text-align:right;color:#c9a96e;">139</td><td style="text-align:right;color:#c9a96e;">50,5%</td></tr>
+          <tr style="border-bottom:1px solid rgba(237,232,223,0.05);"><td style="padding:10px 0;color:rgba(237,232,223,0.7);">UBS Lopes de Oliveira</td><td style="text-align:right;color:rgba(201,169,110,0.8);">138</td><td style="text-align:right;color:rgba(201,169,110,0.8);">50,0%</td></tr>
+          <tr style="border-bottom:1px solid rgba(237,232,223,0.05);"><td style="padding:10px 0;color:rgba(237,232,223,0.7);">UBS Vila Angélica</td><td style="text-align:right;color:rgba(201,169,110,0.65);">135</td><td style="text-align:right;color:rgba(201,169,110,0.65);">49,0%</td></tr>
+          <tr style="border-bottom:1px solid rgba(237,232,223,0.05);"><td style="padding:10px 0;color:rgba(237,232,223,0.7);">UBS Jardim Rodrigo</td><td style="text-align:right;color:rgba(201,169,110,0.5);">131</td><td style="text-align:right;color:rgba(201,169,110,0.5);">47,0%</td></tr>
+          <tr><td style="padding:10px 0;color:rgba(237,232,223,0.7);">UBS Vila Barcelona</td><td style="text-align:right;color:rgba(201,169,110,0.4);">127</td><td style="text-align:right;color:rgba(201,169,110,0.4);">46,0%</td></tr>
+        </tbody>
+      </table>
+      <div class="modal-tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Selenium</span></div>
+      <a class="modal-link" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2025/10/16/mapa-uma-em-cada-duas-farmacias-municipais-de-sorocaba-esta-com-quase-metade-do-estoque-de-medicamentos-zerado.ghtml" target="_blank">Read the article on g1</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-9mm">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title">9mm Pistol Seizures<br>in São Paulo</h2>
+      <button class="modal-close" data-close>Close ✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc">Desde o novo decreto, 36 armas de uso restrito foram apreendidas pela PF — e as pistolas 9mm dominam. Só em 2024, SP registrou 20 apreensões de armas de uso exclusivo das forças de segurança.</p>
+      <div class="modal-insight">"21 das 36 pistolas apreendidas são de 9mm — mais da metade do total."</div>
+      <div class="modal-chart-wrap" style="padding:16px 16px 0;margin-bottom:16px;">
+        <span class="modal-chart-label">Pistolas apreendidas desde o novo decreto — por calibre</span>
+        <div style="margin-top:28px;">
+          <svg viewBox="0 0 400 130" style="width:100%;height:130px;" xmlns="http://www.w3.org/2000/svg">
+            <rect x="30" y="13" width="60" height="87" fill="#c9a96e" rx="2"/>
+            <text x="60" y="10" text-anchor="middle" font-size="11" fill="#c9a96e" font-family="monospace" font-weight="bold">21</text>
+            <text x="60" y="116" text-anchor="middle" font-size="9" fill="rgba(237,232,223,0.55)" font-family="monospace">9mm</text>
+            <rect x="130" y="55" width="60" height="45" fill="rgba(201,169,110,0.55)" rx="2"/>
+            <text x="160" y="52" text-anchor="middle" font-size="11" fill="rgba(201,169,110,0.8)" font-family="monospace">11</text>
+            <text x="160" y="116" text-anchor="middle" font-size="9" fill="rgba(237,232,223,0.55)" font-family="monospace">.40</text>
+            <rect x="230" y="83" width="60" height="17" fill="rgba(201,169,110,0.38)" rx="2"/>
+            <text x="260" y="80" text-anchor="middle" font-size="11" fill="rgba(201,169,110,0.65)" font-family="monospace">4</text>
+            <text x="260" y="116" text-anchor="middle" font-size="9" fill="rgba(237,232,223,0.55)" font-family="monospace">.45 ACP</text>
+            <rect x="330" y="88" width="60" height="12" fill="rgba(201,169,110,0.25)" rx="2"/>
+            <text x="360" y="85" text-anchor="middle" font-size="11" fill="rgba(201,169,110,0.5)" font-family="monospace">3</text>
+            <text x="360" y="116" text-anchor="middle" font-size="9" fill="rgba(237,232,223,0.55)" font-family="monospace">Carabinas</text>
+            <line x1="20" y1="100" x2="400" y2="100" stroke="rgba(237,232,223,0.08)" stroke-width="1"/>
+          </svg>
+        </div>
+      </div>
+      <div class="modal-chart-wrap" style="padding:16px 16px 0;">
+        <span class="modal-chart-label">Apreensões de armas de uso restrito em SP — ano a ano</span>
+        <div style="margin-top:24px;"><iframe src="https://flo.uri.sh/visualisation/22955388/embed" frameborder="0" scrolling="no" style="width:100%;height:380px;border:none;" allowfullscreen></iframe></div>
+      </div>
+      <div class="modal-tags"><span class="tag">Python</span><span class="tag">Flourish</span><span class="tag">Gemini API</span></div>
+      <a class="modal-link" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2025/05/02/pistolas-9mm-representam-mais-da-metade-das-armas-de-uso-restrito-apreendidas-em-sp-desejada-pelo-crime-alerta-especialista.ghtml" target="_blank">Read the article on g1</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-favelas">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title">Life in<br>Sorocaba's Favelas</h2>
+      <button class="modal-close" data-close>Close ✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc">Mapping of Sorocaba's informal settlements revealed that over 12,000 residents live without proximity to essential public services — schools, hospitals, and health clinics remain out of reach.</p>
+      <div class="modal-insight">"12.000+ pessoas sem escola ou hospital em distância caminhável."</div>
+      <div class="modal-chart-wrap" style="padding:16px 16px 0;">
+        <span class="modal-chart-label">Mapa das favelas de Sorocaba — acesso a serviços públicos</span>
+        <div style="margin-top:24px;"><iframe src="https://flo.uri.sh/visualisation/2714348/embed" frameborder="0" scrolling="no" style="width:100%;height:480px;border:none;" allowfullscreen></iframe></div>
+      </div>
+      <div class="modal-tags"><span class="tag">Python</span><span class="tag">Flourish</span><span class="tag">Gemini</span><span class="tag">QGIS</span></div>
+      <a class="modal-link" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2024/11/18/sem-escolas-e-hospitais-mais-de-12-mil-pessoas-vivem-nas-favelas-de-sorocaba-veja-mapa.ghtml" target="_blank">Read the article on g1</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-dv">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title">Distance from Victims<br>to Police</h2>
+      <button class="modal-close" data-close>Close ✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc">Os bairros com maior número de boletins de ocorrência de violência doméstica em Sorocaba estão muito distantes da única Delegacia da Mulher (DDM) — criando uma barreira geográfica ao acesso à justiça.</p>
+      <div class="modal-insight">"Parque Vitória Régia, com 60 BOs, é o bairro mais longe da DDM — 18km de distância."</div>
+      <div class="modal-chart-wrap">
+        <span class="modal-chart-label">BOs registrados vs. distância da DDM — principais bairros (2023)</span>
+        <canvas id="chart-dv"></canvas>
+      </div>
+      <div class="modal-tags"><span class="tag">Python</span><span class="tag">Flourish</span><span class="tag">QGIS</span><span class="tag">Pandas</span></div>
+      <a class="modal-link" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2024/04/01/bairros-com-maior-numero-de-vitimas-de-violencia-domestica-ficam-em-media-a-13km-da-ddm-de-sorocaba-veja-mapa.ghtml" target="_blank">Read the article on g1</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-wanted">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title">40+ People Wanted<br>for 10+ Years</h2>
+      <button class="modal-close" data-close>Close ✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc">Dados do CNJ revelaram que 1.445 mandados de prisão continuavam abertos na comarca de Sorocaba — e 53 deles estavam pendentes há pelo menos dez anos. No Brasil, são 308.489 pessoas procuradas e 22.251 foragidas.</p>
+      <div class="modal-insight">"Um suspeito acumula 6 mandados por roubo e furto — penas somadas chegam a 18 anos."</div>
+      <div class="modal-chart-wrap">
+        <span class="modal-chart-label">Mandados pendentes há 10+ anos — comarca de Sorocaba (CNJ)</span>
+        <canvas id="chart-wanted"></canvas>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px;">
+        <div style="border:1px solid rgba(237,232,223,0.08);padding:16px;"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:#c9a96e;line-height:1;">53</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.15em;color:rgba(237,232,223,0.4);margin-top:6px;text-transform:uppercase;">mandados 10+ anos<br>Sorocaba</div></div>
+        <div style="border:1px solid rgba(237,232,223,0.08);padding:16px;"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:rgba(201,169,110,0.65);line-height:1;">1.445</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.15em;color:rgba(237,232,223,0.4);margin-top:6px;text-transform:uppercase;">mandados abertos<br>total na comarca</div></div>
+        <div style="border:1px solid rgba(237,232,223,0.08);padding:16px;"><div style="font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:rgba(201,169,110,0.4);line-height:1;">308k</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.15em;color:rgba(237,232,223,0.4);margin-top:6px;text-transform:uppercase;">procurados<br>no Brasil (CNJ)</div></div>
+      </div>
+      <div class="modal-tags"><span class="tag">Python</span><span class="tag">Selenium</span><span class="tag">Matplotlib</span><span class="tag">CNJ Data</span></div>
+      <a class="modal-link" href="https://g1.globo.com/sp/sorocaba-jundiai/noticia/2024/12/09/mais-de-40-pessoas-sao-procuradas-pela-justica-ha-pelos-menos-dez-anos-na-regiao-de-sorocaba-indicam-dados-do-cnj.ghtml" target="_blank">Read the article on g1</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-music">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title">Is My Music<br>Really Sad?</h2>
+      <button class="modal-close" data-close>Close ✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc">Usando a API do Spotify via Spotipy, extraí os atributos musicais de cada faixa — valência, energia e dançabilidade. Álbum analisado: <em style="color:var(--warm)">All We Know Is Falling</em>, do Paramore.</p>
+      <div class="modal-insight">"Franklin tem a menor valência do disco (0.21) — a música mais triste. Energia média: 0.87."</div>
+      <div class="modal-chart-wrap">
+        <span class="modal-chart-label">Danceability · Energy · Valence por faixa — Spotify API</span>
+        <div id="chart-music" style="margin-top:24px;overflow-x:auto;"></div>
+      </div>
+      <div class="modal-tags"><span class="tag">Python</span><span class="tag">Spotipy</span><span class="tag">Matplotlib</span><span class="tag">Seaborn</span></div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── Cursor ──────────────────────────────────────
   const cursor = document.getElementById('cursor');
   const ring   = document.getElementById('cursorRing');
@@ -891,6 +1138,261 @@
     const y = window.scrollY;
     if (bgText) bgText.style.transform = `translateY(calc(-50% + ${y * 0.4}px))`;
   });
+
+
+// ── Chart.js defaults
+Chart.defaults.color='rgba(237,232,223,0.45)';
+Chart.defaults.borderColor='rgba(237,232,223,0.07)';
+Chart.defaults.font.family="'JetBrains Mono', monospace";
+Chart.defaults.font.size=10;
+
+const WARM='#c9a96e';
+const CREAM='rgba(237,232,223,0.7)';
+const DIM='rgba(237,232,223,0.22)';
+const wf=a=>`rgba(201,169,110,${a})`;
+
+
+// ── Modals
+const built={};
+
+function openModal(id){
+  const el=document.getElementById(id); if(!el) return;
+  document.body.style.overflow='hidden';
+  el.classList.add('open');
+  setTimeout(()=>buildChart(id),100);
+}
+function closeModal(el){
+  el.classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.querySelectorAll('[data-modal]').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.modal)));
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();closeModal(b.closest('.modal-overlay'));}));
+document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeModal(o);}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(closeModal);});
+
+// ── SVG helpers for hover previews ─────────────
+  const W2=198,H2=84,PAD2=10;
+  const df2=a=>`rgba(237,232,223,${a})`;
+  const wf2=a=>`rgba(201,169,110,${a})`;
+  const WARM_C='#c9a96e';
+
+  function svgBar2(data,colors,labels){
+    const max=Math.max(...data),pw=W2-PAD2*2,ph=H2-PAD2*2-12,bw=Math.floor(pw/data.length)-3;
+    let s='';
+    data.forEach((v,i)=>{
+      const h=Math.round((v/max)*ph),x=PAD2+i*(bw+3);
+      s+=`<rect x="${x}" y="${PAD2+ph-h}" width="${bw}" height="${h}" fill="${colors[i]}" rx="1"/>`;
+      if(labels) s+=`<text x="${x+bw/2}" y="${H2-2}" text-anchor="middle" font-size="7" fill="${df2(.3)}" font-family="monospace">${labels[i]}</text>`;
+    });
+    return s;
+  }
+  function svgLine2(data,color){
+    const max=Math.max(...data),min=Math.min(...data),pw=W2-PAD2*2,ph=H2-PAD2*2;
+    const pts=data.map((v,i)=>`${PAD2+i*(pw/(data.length-1))},${PAD2+ph-((v-min)/(max-min||1))*ph}`).join(' ');
+    return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linejoin="round"/>`;
+  }
+
+  const PREVIEWS={
+    'modal-moneyball':{label:'OBP vs Vitorias — MLB',stat:'R²=0.36',statLabel:'OBP predicts wins',
+      svg(){
+        const pts=[[.310,83],[.320,75],[.330,85],[.340,85],[.345,102],[.350,91],[.360,102],[.370,90],[.375,97]];
+        const xMin=.305,xMax=.380,yMin=48,yMax=120;
+        const toX=x=>PAD2+(x-xMin)/(xMax-xMin)*(W2-PAD2*2);
+        const toY=y=>(H2-PAD2)-(y-yMin)/(yMax-yMin)*(H2-PAD2*2);
+        let s='';
+        pts.forEach(([x,y])=>{s+=`<circle cx="${toX(x).toFixed(1)}" cy="${toY(y).toFixed(1)}" r="2.5" fill="rgba(100,140,255,0.7)"/>`;});
+        const r1=[.308,468*.308-76],r2=[.375,468*.375-76];
+        s+=`<line x1="${toX(r1[0]).toFixed(1)}" y1="${toY(r1[1]).toFixed(1)}" x2="${toX(r2[0]).toFixed(1)}" y2="${toY(r2[1]).toFixed(1)}" stroke="rgba(220,80,60,0.9)" stroke-width="1.5"/>`;
+        s+=`<circle cx="${toX(.345).toFixed(1)}" cy="${toY(102).toFixed(1)}" r="4" fill="${WARM_C}" stroke="#0c0b09" stroke-width="1"/>`;
+        return s;
+      }
+    },
+    'modal-pharma':{label:'Medicamentos em falta',stat:'139',statLabel:'UBS Aparecidinha (50,5%)',
+      svg(){
+        const data=[139,138,135,131,127],pcts=['50,5%','50%','49%','47%','46%'],labels=['Aparec.','Lopes','V.Ang.','Jd.Rod.','V.Barc.'];
+        const max=145,pw=W2-PAD2*2-28,bh=10,gap=4;
+        let s='';
+        data.forEach((v,i)=>{
+          const w=(v/max)*pw,y=PAD2+i*(bh+gap),alpha=0.95-i*0.12;
+          s+=`<rect x="${PAD2}" y="${y}" width="${w.toFixed(1)}" height="${bh}" fill="${wf2(alpha)}" rx="1"/>`;
+          s+=`<text x="${PAD2+w+3}" y="${y+bh-1}" font-size="7" fill="${wf2(.7)}" font-family="monospace">${pcts[i]}</text>`;
+          s+=`<text x="${PAD2-2}" y="${y+bh-1}" text-anchor="end" font-size="6.5" fill="${df2(.3)}" font-family="monospace">${labels[i]}</text>`;
+        });
+        return s;
+      }
+    },
+    'modal-9mm':{label:'Pistolas apreendidas — PF',stat:'21',statLabel:'de 36 sao 9mm (58%)',
+      svg(){return svgBar2([21,11,4,3],[wf2(.95),wf2(.6),wf2(.4),wf2(.25)],['9mm','.40','.45','Carab.']);}
+    },
+    'modal-favelas':{label:'Favelas de Sorocaba',stat:'12k+',statLabel:'moradores sem servicos proximos',
+      svg(){
+        const pts=[[40,30],[70,45],[55,60],[90,35],[110,50],[80,65],[130,40],[100,70],[60,80],[120,30]];
+        let s='';
+        pts.forEach(([x,y],i)=>{s+=`<circle cx="${x}" cy="${y}" r="${3+i%3}" fill="${wf2(.4+i*.05)}" opacity=".8"/>`;});
+        s+=`<text x="${W2/2}" y="${H2-2}" text-anchor="middle" font-size="7" fill="${df2(.2)}" font-family="monospace">mapa de favelas</text>`;
+        return s;
+      }
+    },
+    'modal-dv':{label:'BOs x distancia da DDM',stat:'18km',statLabel:'Vitoria Regia — mais longe',
+      svg(){
+        const bairros=[['Pq. S.Bento',97,13.5,.9],['Vila Barao',68,4.9,.6],['Pq.Vit.Regia',60,18.0,.4]];
+        const xMin=0,xMax=22,yMin=0,yMax=110;
+        const toX=x=>PAD2+(x-xMin)/(xMax-xMin)*(W2-PAD2*2);
+        const toY=y=>(H2-PAD2-10)-(y-yMin)/(yMax-yMin)*(H2-PAD2*2-10);
+        let s='';
+        s+=`<line x1="${PAD2}" y1="${H2-PAD2-10}" x2="${W2-PAD2}" y2="${H2-PAD2-10}" stroke="${df2(.08)}" stroke-width=".5"/>`;
+        s+=`<text x="${W2/2}" y="${H2-1}" text-anchor="middle" font-size="6.5" fill="${df2(.2)}" font-family="monospace">distancia da DDM (km)</text>`;
+        bairros.forEach(([nome,bos,dist,alpha])=>{
+          const cx=toX(dist),cy=toY(bos),r=Math.round(4+bos/16);
+          s+=`<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r}" fill="${wf2(alpha)}" stroke="${wf2(alpha+.2)}" stroke-width="1"/>`;
+          s+=`<text x="${cx.toFixed(1)}" y="${(cy-r-2).toFixed(1)}" text-anchor="middle" font-size="6" fill="${df2(.45)}" font-family="monospace">${nome}</text>`;
+          s+=`<text x="${cx.toFixed(1)}" y="${(cy+3).toFixed(1)}" text-anchor="middle" font-size="7" fill="${df2(.8)}" font-family="monospace" font-weight="bold">${bos}</text>`;
+        });
+        return s;
+      }
+    },
+    'modal-wanted':{label:'Mandados pendentes — CNJ',stat:'53',statLabel:'mandados ha 10+ anos em Sorocaba',
+      svg(){return svgBar2([7,31,4,8,1,1,1],[wf2(.45),wf2(.9),wf2(.5),wf2(.7),wf2(.32),wf2(.28),wf2(.24)],['10','11','12','13','14','15','16']);}
+    },
+    'modal-music':{label:'All We Know Is Falling — Paramore',stat:'0.21',statLabel:'valencia minima — Franklin',
+      svg(){
+        const valence=[0.37,0.46,0.32,0.56,0.21,0.54,0.36,0.53,0.66,0.42];
+        const energy=[0.91,0.93,0.91,0.94,0.69,0.85,0.80,0.88,0.89,0.93];
+        const n=valence.length,pw=W2-PAD2*2,ph=H2-PAD2*2-8;
+        const toX=i=>PAD2+i*(pw/(n-1));
+        const toY=v=>(H2-PAD2-8)-(v*ph);
+        let s='';
+        s+=`<polyline points="${energy.map((v,i)=>`${toX(i).toFixed(1)},${toY(v).toFixed(1)}`).join(' ')}" fill="none" stroke="rgba(80,190,160,0.45)" stroke-width="1.5" stroke-linejoin="round"/>`;
+        s+=`<polyline points="${valence.map((v,i)=>`${toX(i).toFixed(1)},${toY(v).toFixed(1)}`).join(' ')}" fill="none" stroke="${WARM_C}" stroke-width="1.8" stroke-linejoin="round"/>`;
+        s+=`<circle cx="${toX(4).toFixed(1)}" cy="${toY(0.21).toFixed(1)}" r="3.5" fill="${WARM_C}"/>`;
+        s+=`<text x="${toX(4).toFixed(1)}" y="${(toY(0.21)-5).toFixed(1)}" text-anchor="middle" font-size="6.5" fill="${WARM_C}" font-family="monospace">Franklin</text>`;
+        return s;
+      }
+    }
+  };
+
+  // ── Hover Preview Logic ─────────────────────────
+  const previewCard=document.getElementById('previewCard');
+  document.querySelectorAll('[data-modal]').forEach(btn=>{
+    btn.addEventListener('mouseenter',()=>{
+      const id=btn.dataset.modal,p=PREVIEWS[id]; if(!p) return;
+      document.getElementById('previewLabel').textContent=p.label;
+      document.getElementById('previewSvg').innerHTML=p.svg();
+      document.getElementById('previewStat').textContent=p.stat;
+      document.getElementById('previewStatLabel').textContent=p.statLabel;
+      previewCard.classList.add('visible');
+    });
+    btn.addEventListener('mouseleave',()=>previewCard.classList.remove('visible'));
+  });
+  document.addEventListener('mousemove',e=>{
+    const x=e.clientX+20,y=e.clientY+20;
+    previewCard.style.left=(x+240>window.innerWidth?e.clientX-240:x)+'px';
+    previewCard.style.top=(y+160>window.innerHeight?e.clientY-160:y)+'px';
+  });
+
+// ── Chart builders
+function buildChart(id) {
+  if (built[id]) return;
+  built[id] = true;
+
+  if (id === 'modal-moneyball') {
+    const teamData=[
+      {x:.310,y:83},{x:.310,y:76},{x:.310,y:65},{x:.312,y:90},{x:.314,y:63},
+      {x:.320,y:75},{x:.320,y:76},{x:.321,y:68},{x:.322,y:68},{x:.323,y:67},
+      {x:.323,y:71},{x:.325,y:73},{x:.326,y:79},{x:.327,y:66},{x:.328,y:73},
+      {x:.329,y:83},{x:.330,y:85},{x:.331,y:69},{x:.332,y:81},{x:.333,y:72},
+      {x:.334,y:78},{x:.335,y:80},{x:.336,y:82},{x:.337,y:92},{x:.338,y:79},
+      {x:.339,y:88},{x:.340,y:85},{x:.341,y:91},{x:.342,y:87},{x:.343,y:86},
+      {x:.344,y:93},{x:.345,y:88},{x:.346,y:95},{x:.347,y:90},{x:.348,y:94},
+      {x:.349,y:96},{x:.350,y:91},{x:.351,y:93},{x:.352,y:98},{x:.353,y:95},
+      {x:.354,y:97},{x:.355,y:100},{x:.356,y:95},{x:.357,y:99},{x:.358,y:97},
+      {x:.359,y:96},{x:.360,y:102},{x:.361,y:103},{x:.362,y:98},{x:.363,y:101},
+      {x:.364,y:99},{x:.365,y:104},{x:.366,y:102},{x:.367,y:107},{x:.368,y:99},
+      {x:.369,y:97},{x:.370,y:90},{x:.373,y:97}
+    ];
+    new Chart(document.getElementById('chart-moneyball'), {
+      type:'scatter',
+      data:{datasets:[
+        {label:'Equipes MLB',data:teamData,backgroundColor:'rgba(100,140,255,0.7)',pointRadius:4,pointHoverRadius:6},
+        {label:'Regressao linear',data:[{x:.308,y:468*.308-76},{x:.375,y:468*.375-76}],type:'line',borderColor:'rgba(220,80,60,0.9)',backgroundColor:'transparent',pointRadius:0,borderWidth:2,tension:0,showLine:true},
+        {label:'Oakland Athletics 2001',data:[{x:.345,y:102}],backgroundColor:WARM,pointRadius:8,pointHoverRadius:10,pointStyle:'star'}
+      ]},
+      options:{
+        responsive:true,
+        plugins:{legend:{labels:{color:CREAM,padding:14}},tooltip:{callbacks:{label:c=>`${c.dataset.label}: OBP ${c.parsed.x.toFixed(3)}, ${c.parsed.y} vitorias`}}},
+        scales:{
+          x:{title:{display:true,text:'On-Base Percentage (OBP)',color:DIM},min:.305,max:.38,grid:{color:'rgba(237,232,223,0.05)'},ticks:{color:DIM,callback:v=>v.toFixed(3)}},
+          y:{title:{display:true,text:'Numero de Vitorias',color:DIM},min:48,max:120,grid:{color:'rgba(237,232,223,0.05)'},ticks:{color:DIM}}
+        }
+      }
+    });
+  }
+
+  // pharma, 9mm, favelas: iframes — sem Chart.js
+
+  if (id === 'modal-dv') {
+    new Chart(document.getElementById('chart-dv'), {
+      type:'bubble',
+      data:{datasets:[
+        {label:'Parque Sao Bento',data:[{x:13.5,y:97,r:18}],backgroundColor:wf(.85),borderColor:WARM,borderWidth:1.5},
+        {label:'Vila Barao',data:[{x:4.9,y:68,r:14}],backgroundColor:wf(.55),borderColor:wf(.8),borderWidth:1.5},
+        {label:'Parque Vitoria Regia',data:[{x:18.0,y:60,r:12}],backgroundColor:wf(.35),borderColor:wf(.6),borderWidth:1.5}
+      ]},
+      options:{
+        responsive:true,
+        plugins:{legend:{labels:{color:CREAM,font:{size:11},padding:16}},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y} BOs · ${c.parsed.x}km da DDM`}}},
+        scales:{
+          x:{title:{display:true,text:'Distancia da DDM (km)',color:DIM},min:0,max:22,grid:{color:'rgba(237,232,223,0.05)'},ticks:{color:DIM,callback:v=>v+'km'}},
+          y:{title:{display:true,text:'Boletins de Ocorrencia (2023)',color:DIM},min:0,max:120,grid:{color:'rgba(237,232,223,0.05)'},ticks:{color:DIM}}
+        }
+      }
+    });
+  }
+
+  if (id === 'modal-wanted') {
+    new Chart(document.getElementById('chart-wanted'), {
+      type:'bar',
+      data:{
+        labels:['10 anos','11 anos','12 anos','13 anos','14 anos','15 anos','16 anos'],
+        datasets:[{label:'Mandados pendentes',data:[7,31,4,8,1,1,1],
+          backgroundColor:[wf(.45),wf(.9),wf(.5),wf(.7),wf(.35),wf(.3),wf(.25)],borderWidth:0,borderRadius:3}]
+      },
+      options:{
+        responsive:true,
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y} mandado${c.parsed.y>1?'s':''} pendente${c.parsed.y>1?'s':''}`}}},
+        scales:{
+          y:{grid:{color:'rgba(237,232,223,0.05)'},ticks:{color:DIM},title:{display:true,text:'No de mandados',color:DIM}},
+          x:{grid:{display:false},ticks:{color:CREAM},title:{display:true,text:'Tempo pendente',color:DIM}}
+        }
+      }
+    });
+  }
+
+  if (id === 'modal-music') {
+    const songs=['All We Know','Brighter','Conspiracy','Emergency','Franklin','Here We Go Again','My Heart','Never Let This Go','Pressure','Whoa'];
+    const attrs=['danceability','energy','valence'];
+    const data={danceability:[0.50,0.50,0.49,0.42,0.49,0.51,0.44,0.52,0.51,0.33],energy:[0.91,0.93,0.91,0.94,0.69,0.85,0.80,0.88,0.89,0.93],valence:[0.37,0.46,0.32,0.56,0.21,0.54,0.36,0.53,0.66,0.42]};
+    const stops=[[0,[8,7,26]],[0.25,[48,35,95]],[0.5,[50,130,140]],[0.75,[70,185,165]],[1,[202,237,217]]];
+    function mako(v){let i=0;while(i<stops.length-2&&v>stops[i+1][0])i++;const [t0,c0]=stops[i],[t1,c1]=stops[i+1],t=(v-t0)/(t1-t0);return [0,1,2].map(j=>Math.round(c0[j]+(c1[j]-c0[j])*t));}
+    function tc(r,g,b){return(0.299*r+0.587*g+0.114*b)>140?'#1a1a2e':'#ede8df';}
+    const wrap=document.getElementById('chart-music');
+    const colW=72,rowH=40,labelW=100;
+    let html=`<div style="font-family:'JetBrains Mono',monospace;font-size:9px;">`;
+    html+=`<div style="display:flex;margin-left:${labelW}px;margin-bottom:4px;">`;
+    songs.forEach(s=>{html+=`<div style="width:${colW}px;flex-shrink:0;text-align:center;color:rgba(237,232,223,0.5);font-size:8px;padding:0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${s}">${s}</div>`;});
+    html+=`</div>`;
+    attrs.forEach(attr=>{
+      html+=`<div style="display:flex;align-items:center;margin-bottom:3px;">`;
+      html+=`<div style="width:${labelW}px;flex-shrink:0;color:rgba(237,232,223,0.6);font-size:9px;letter-spacing:.1em;padding-right:12px;text-align:right;">${attr}</div>`;
+      data[attr].forEach(v=>{const [r,g,b]=mako(v);html+=`<div style="width:${colW}px;height:${rowH}px;flex-shrink:0;background:rgb(${r},${g},${b});display:flex;align-items:center;justify-content:center;font-size:10px;color:${tc(r,g,b)};font-weight:500;margin:0 1px;border-radius:2px;">${v.toFixed(2)}</div>`;});
+      html+=`</div>`;
+    });
+    html+=`<div style="display:flex;align-items:center;gap:8px;margin-top:16px;margin-left:${labelW}px;"><span style="color:rgba(237,232,223,0.3);font-size:8px;">0.0</span><div style="flex:1;max-width:160px;height:8px;border-radius:2px;background:linear-gradient(to right,rgb(8,7,26),rgb(48,35,95),rgb(50,130,140),rgb(70,185,165),rgb(202,237,217));"></div><span style="color:rgba(237,232,223,0.3);font-size:8px;">1.0</span></div>`;
+    html+=`</div>`;
+    wrap.innerHTML=html;
+  }
+}
 </script>
 </body>
 </html>
