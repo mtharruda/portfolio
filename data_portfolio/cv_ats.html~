@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matheus Arruda — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600;1,400&family=Syne:wght@400;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  /* Reset e Definições de Página */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0c0b09;
+    --cream: #ede8df;
+    --warm: #c9a96e;
+    --muted: rgba(237,232,223,0.42);
+    --faint: rgba(237,232,223,0.1);
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html, body {
+    width: 210mm;
+    height: 297mm;
+    background: #0c0b09;
+    color: #ede8df;
+    font-family: 'Syne', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 12mm 15mm;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── HEADER ─────────────────────────────────── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 6mm;
+    border-bottom: 0.3px solid rgba(237,232,223,0.14);
+    margin-bottom: 6mm;
+  }
+  .header-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-bottom: 2mm;
+    display: block;
+  }
+  .header-name {
+    font-family: 'Cormorant', Georgia, serif;
+    font-size: 42pt;
+    font-weight: 400;
+    line-height: 0.9;
+    color: var(--cream);
+  }
+  .header-name .italic { font-style: italic; color: var(--warm); }
+
+  .header-right { text-align: right; }
+  .header-contact-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  /* ── SECTIONS ───────────────────────────────── */
+  .section { margin-bottom: 5mm; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4mm;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--warm);
+  }
+  .section-rule { flex: 1; height: 0.3px; background: var(--faint); }
+
+  .summary-text {
+    font-family: 'Cormorant', Georgia, serif;
+    font-size: 13pt;
+    line-height: 1.4;
+    color: var(--cream);
+    max-width: 100%;
+  }
+
+  /* ── EXPERIÊNCIA (Layout Vertical) ───────────── */
+  .exp-item {
+    display: grid;
+    grid-template-columns: 40mm 1fr;
+    gap: 6mm;
+    padding: 3mm 0;
+    border-bottom: 0.3px solid rgba(237,232,223,0.08);
+  }
+  .exp-item:last-of-type { border-bottom: none; }
+  .exp-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.5pt;
+    color: var(--warm);
+    display: block;
+    margin-bottom: 1.5mm;
+  }
+  .exp-company {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.5pt;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .exp-role {
+    font-family: 'Cormorant', Georgia, serif;
+    font-size: 15pt;
+    font-weight: 500;
+    margin-bottom: 1.5mm;
+    color: var(--cream);
+  }
+  .exp-desc {
+    font-size: 8pt;
+    color: rgba(237,232,223,0.55);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  /* ── SKILLS & EDU (Horizontal dentro do fluxo) ── */
+  .flex-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10mm;
+    margin-top: 2mm;
+  }
+
+  .skill-group { margin-bottom: 4mm; }
+  .skill-group-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.5pt;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-bottom: 2mm;
+    display: block;
+  }
+  .skill-items { display: flex; flex-wrap: wrap; gap: 5px; }
+  .skill-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.5pt;
+    color: var(--muted);
+    border: 0.3px solid var(--faint);
+    padding: 2px 6px;
+  }
+
+  .edu-item { padding: 2.5mm 0; border-bottom: 0.3px solid var(--faint); }
+  .edu-item:last-child { border-bottom: none; }
+  .edu-degree { font-family: 'Cormorant', Georgia, serif; font-size: 12pt; color: var(--cream); margin-bottom: 1mm; }
+  .edu-school { font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; color: var(--muted); display: block; }
+
+  .cv-footer {
+    margin-top: auto;
+    padding-top: 4mm;
+    border-top: 0.3px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6pt;
+    color: rgba(237,232,223,0.15);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  @media print {
+    body { background: #0c0b09 !important; }
+    .page { height: 297mm; width: 210mm; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div>
+      <span class="header-tag">Analista de Dados & Storyteller</span>
+      <h1 class="header-name">Matheus <span class="italic">Arruda</span></h1>
+    </div>
+    <div class="header-right">
+      <span class="header-contact-item">São Paulo, BR</span>
+      <span class="header-contact-item">mtharruda.github.io/portfolio</span>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-label">Perfil Profissional</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="summary-text">
+      Analista de dados e jornalista especializado em transformar grandes volumes de dados em
+      <span style="color:var(--warm)">narrativas e estratégias de alto impacto</span>.
+      Especialista em Python, Machine Learning e visualizações interativas para suporte a decisões estratégicas.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-label">Experiência Profissional</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <span class="exp-period">Nov 2024 — Atual</span>
+        <span class="exp-company">g1 — Globo</span>
+      </div>
+      <div>
+        <h3 class="exp-role">Analista de Dados</h3>
+        <p class="exp-desc">Liderança em inteligência de dados na seção de WEB. Desenvolvimento de análises avançadas para jornalismo investigativo, processamento de bases governamentais e criação de dashboards para medição de engajamento da audiência e SEO Analytics.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <span class="exp-period">Set 2022 — Nov 2024</span>
+        <span class="exp-company">g1 — Globo</span>
+      </div>
+      <div>
+        <h3 class="exp-role">Editor de Conteúdo</h3>
+        <p class="exp-desc">Otimização de performance por meio de SEO orientado a dados. Desenvolvimento de frameworks de audiência, unindo decisões editoriais à análise quantitativa para maximizar o alcance digital.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <span class="exp-period">Jan 2020 — Jun 2022</span>
+        <span class="exp-company">TV TEM — Globo</span>
+      </div>
+      <div>
+        <h3 class="exp-role">Produtor de Conteúdo</h3>
+        <p class="exp-desc">Produção orientada a dados para TV e plataformas digitais. Análises estatísticas para pautas regionais e visualização de dados para o telejornalismo.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex-row">
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-label">Skills Técnicas</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="skill-group">
+        <span class="skill-group-label">Programação & Dados</span>
+        <div class="skill-items">
+          <span class="skill-tag">Python (Pandas/Polars)</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Web Scraping</span>
+          <span class="skill-tag">APIs</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <span class="skill-group-label">Visualização & BI</span>
+        <div class="skill-items">
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Looker Studio</span>
+          <span class="skill-tag">Seaborn</span>
+          <span class="skill-tag">QGIS</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-label">Educação</h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="edu-item">
+        <h3 class="edu-degree">MBA em Jornalismo de Dados</h3>
+        <span class="edu-school">PUC Minas | 2023 — 2025</span>
+      </div>
+      <div class="edu-item">
+        <h3 class="edu-degree">Comunicação Social</h3>
+        <span class="edu-school">Esamc Sorocaba | 2017 — 2022</span>
+      </div>
+    </section>
+  </div>
+
+  <footer class="cv-footer">
+    <span>Matheus Arruda</span>
+    <span>2026</span>
+  </footer>
+
+</div>
+</body>
+</html>

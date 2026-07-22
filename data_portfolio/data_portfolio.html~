@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -647,25 +647,25 @@
 <nav>
   <a href="#" class="nav-logo">Matheus Arruda</a>
   <ul class="nav-links">
-    <li><a href="#projects">Projetos</a></li>
-    <li><a href="#about">Sobre</a></li>
-    <li><a href="#experience">Experiência</a></li>
-    <li><a href="#contact">Contato</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- Hero -->
 <div class="hero">
   <div class="hero-bg-text"></div>
-  <p class="hero-tag">Analista de dados &amp; Storyteller — São Paulo, BR</p>
+  <p class="hero-tag">Data Analyst &amp; Storyteller — São Paulo, BR</p>
   <h1 class="hero-title">
-    Dados que<br>
-    <em>contam histórias</em>
+    Numbers that<br>
+    <em>tell stories</em>
   </h1>
   <div class="hero-bottom">
     <p class="hero-role">
-      Analista de dados @ g1 - Globo <br>
-      Python & SQL · Visualização de dados · Machine Learning · BI
+      Data Analyst @ g1 — Globo News Portal<br>
+      Python & SQL Specialist · Automation & ETL · Machine Learning · DataViz · Power BI
     </p>
     <div class="hero-scroll">
       <div class="hero-scroll-line"></div>
@@ -677,25 +677,26 @@
 <!-- Projects -->
 <section id="projects">
   <div class="section-header reveal">
-    <span class="section-label">Projetos de destaque</span>
+    <span class="section-label">Selected Work</span>
     <div class="section-line"></div>
+    <span class="section-count">08 Projects</span>
   </div>
 
   <a class="project-row reveal" href="https://github.com/mtharruda/Auditorium/blob/main/README.md" target="_blank">
     <span class="project-num">01</span>
     <div class="project-main">
-      <h2 class="project-title">Auditorium</h2>
-      <p class="project-desc">Aplicação para ajudar jornalistas a encontrar títulos eficientes por meio de um algoritmo treinado e Inteligência Artificial generativa.</p>
+      <h2 class="project-title">Auditorium: AI-Driven Predictive Analytics & NLP</h2>
+      <p class="project-desc">Developed a machine learning application to predict audience engagement and optimize content strategy.</p>
       <div class="project-tags">
         <span class="tag">Python</span>
         <span class="tag">Scikit-Learn</span>
-        <span class="tag">Google Gemini</span>
         <span class="tag">FuzzyWuzzy</span>
+        <span class="tag">Google Gemini</span>
       </div>
     </div>
     <div class="project-meta">
       <span class="project-date">Jan 2025</span>
-      <span class="project-status">Em produção</span>
+      <span class="project-status">Published</span>
     </div>
   </a>
   
@@ -703,20 +704,19 @@
   <button class="project-row reveal" data-modal="modal-moneyball">
     <span class="project-num">02</span>
     <div class="project-main">
-      <h2 class="project-title">Como vencer um jogo injusto?</h2>
-      <p class="project-desc">Simulação das estratégias e análise de dados usadas por Paul DePodesta com o Oakland Athletics em 2001.</p>
+      <h2 class="project-title">How to Win an Unfair Game?</h2>
+      <p class="project-desc">Simulation of the strategies and data analysis used by Paul DePodesta with the Oakland Athletics in 2001 — the Moneyball approach.</p>
       <div class="project-tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Linear Regression</span></div>
     </div>
-    <div class="project-meta"><span class="project-date">Aug 2025</span>
-      <span class="project-status">Estudo</span>
+    <div class="project-meta"><span class="project-date">Aug 2025</span><span class="project-status">Study</span>
     </div>
   </button>
 
   <button class="project-row reveal" data-modal="modal-pharma">
     <span class="project-num">03</span>
     <div class="project-main">
-      <h2 class="project-title">Municipal Pharmacies Shortage</h2>
-      <p class="project-desc">A reportagem revelou a situação crítica no estoque de medicamentos das farmácias municipais de Sorocaba. Uma em cada duas unidades estava com mais da metade do estoque zerado.</p>
+      <h2 class="project-title">Automated Supply Chain Monitoring & Web Scraping</h2>
+      <p class="project-desc">Built a robust web scraping pipeline to monitor real-time medication availability across municipal healthcare units.</p>
       <div class="project-tags">
         <span class="tag">Python</span>
         <span class="tag">Pandas</span>
@@ -724,47 +724,13 @@
       </div>
     </div>
     <div class="project-meta">
-      <span class="project-date">Agosto de 2025</span>
-      <span class="project-status">Publicado</span>
-    </div>
-  </button>
-
-  <button class="project-row reveal" data-modal="modal-9mm">
-    <span class="project-num">04</span>
-    <div class="project-main">
-      <h2 class="project-title">Apreensões de pistolas 9mm em SP</h2>
-      <p class="project-desc">No vai-e-vem de decretos, a pistola 9mm. passou a estar envolvida em mais da metade das apreensões de armas no estado de São Paulo.</p>
-      <div class="project-tags">
-        <span class="tag">Python</span>
-        <span class="tag">Flourish</span>
-        <span class="tag">Gemini</span>
-      </div>
-    </div>
-    <div class="project-meta">
-      <span class="project-date">Maio de 2025</span>
-      <span class="project-status">Publicado</span>
-    </div>
-  </button>
-
-  <button class="project-row reveal" data-modal="modal-favelas">
-    <span class="project-num">05</span>
-    <div class="project-main">
-      <h2 class="project-title">Como é a vida nas favelas de Sorocaba</h2>
-      <p class="project-desc">12,000+ residents of Sorocaba's favelas lack access to schools and hospitals. Interactive map built to expose urban inequality in the city's most vulnerable regions.</p>
-      <div class="project-tags">
-        <span class="tag">Python</span>
-        <span class="tag">Flourish</span>
-        <span class="tag">Gemini</span>
-      </div>
-    </div>
-    <div class="project-meta">
-      <span class="project-date">Nov 2024</span>
+      <span class="project-date">Aug 2025</span>
       <span class="project-status">Published</span>
     </div>
   </button>
 
   <button class="project-row reveal" data-modal="modal-dv">
-    <span class="project-num">06</span>
+    <span class="project-num">04</span>
     <div class="project-main">
       <h2 class="project-title">Distance from Domestic Violence Victims to Police</h2>
       <p class="project-desc">Neighborhoods with the highest domestic violence rates are on average 13km from Sorocaba's Women's Police Station. A data-driven report on access to justice.</p>
@@ -780,28 +746,11 @@
     </div>
   </button>
 
-  <button class="project-row reveal" data-modal="modal-wanted">
-    <span class="project-num">07</span>
-    <div class="project-main">
-      <h2 class="project-title">40+ People Wanted for 10+ Years</h2>
-      <p class="project-desc">More than 40 people have been wanted by the justice system for at least a decade in the Sorocaba region, according to CNJ data analysis.</p>
-      <div class="project-tags">
-        <span class="tag">Python</span>
-        <span class="tag">Selenium</span>
-        <span class="tag">Matplotlib</span>
-      </div>
-    </div>
-    <div class="project-meta">
-      <span class="project-date">Dec 2024</span>
-      <span class="project-status">Published</span>
-    </div>
-  </button>
-
   <button class="project-row reveal" data-modal="modal-music">
-    <span class="project-num">08</span>
+    <span class="project-num">05</span>
     <div class="project-main">
-      <h2 class="project-title">Is My Music Really Sad?</h2>
-      <p class="project-desc">Code to analyze musical attributes — valence, energy, danceability and tempo — of albums using the Spotify API to quantify the emotional character of music.</p>
+      <h2 class="project-title">REST API Integration & Multivariate Data Analysis</h2>
+      <p class="project-desc">Engineered a data extraction tool to analyze musical attributes and emotional valence through the Spotify API.</p>
       <div class="project-tags">
         <span class="tag">Python</span>
         <span class="tag">Spotify API</span>
@@ -845,7 +794,7 @@
         <div class="edu-item">
           <div class="edu-degree">MBA in Data Journalism</div>
           <span class="edu-school">PUC Minas</span>
-          <span class="edu-year">2023 – 2025</span>
+          <span class="edu-year">2023 – 2025777</span>
         </div>
         <div class="edu-item">
           <div class="edu-degree">Bachelor's in Social Communication: Journalism</div>
