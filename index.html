@@ -720,7 +720,7 @@
   
   <!-- 02–08 → modais -->
   <button class="project-row reveal" data-modal="modal-moneyball">
-    <span class="project-num">02</span>
+    <span class="project-num">03</span>
     <div class="project-main">
       <h2 class="project-title">Como vencer um jogo injusto?</h2>
       <p class="project-desc">Simulação das estratégias e análise de dados usadas por Paul DePodesta com o Oakland Athletics em 2001.</p>
@@ -732,7 +732,7 @@
   </button>
 
   <button class="project-row reveal" data-modal="modal-pharma">
-    <span class="project-num">03</span>
+    <span class="project-num">04</span>
     <div class="project-main">
       <h2 class="project-title">Desabastecimento nas farmácias públicas</h2>
       <p class="project-desc">A reportagem revelou a situação crítica no estoque de medicamentos das farmácias municipais de Sorocaba. Uma em cada duas unidades estava com mais da metade do estoque zerado.</p>
@@ -749,7 +749,7 @@
   </button>
 
   <button class="project-row reveal" data-modal="modal-9mm">
-    <span class="project-num">04</span>
+    <span class="project-num">05</span>
     <div class="project-main">
       <h2 class="project-title">Apreensões de pistolas 9mm em SP</h2>
       <p class="project-desc">No vai-e-vem de decretos, a pistola 9mm. passou a estar envolvida em mais da metade das apreensões de armas no estado de São Paulo.</p>
@@ -766,7 +766,7 @@
   </button>
 
   <button class="project-row reveal" data-modal="modal-favelas">
-    <span class="project-num">05</span>
+    <span class="project-num">06</span>
     <div class="project-main">
       <h2 class="project-title">Como é a vida nas favelas de Sorocaba</h2>
       <p class="project-desc">Mais de 12 mil pessoas vivem sem acesso à escolas e hospitais em Sorocaba. O mapa desenvolvido para a reportagem expõe as desiguldades nas regiões mais vulneráveis do município.</p>
@@ -783,7 +783,7 @@
   </button>
 
   <button class="project-row reveal" data-modal="modal-dv">
-    <span class="project-num">06</span>
+    <span class="project-num">07</span>
     <div class="project-main">
       <h2 class="project-title">Mapeamento da distância entre delegacia e vítimas de violência doméstica</h2>
       <p class="project-desc">Os bairros com maior número de boletins de ocorrência de violência doméstica em Sorocaba estão muito distantes da única Delegacia da Mulher (DDM) — criando uma barreira geográfica ao acesso à justiça.</p>
@@ -800,7 +800,7 @@
   </button>
 
   <button class="project-row reveal" data-modal="modal-wanted">
-    <span class="project-num">07</span>
+    <span class="project-num">08</span>
     <div class="project-main">
       <h2 class="project-title">Raio-X dos procurados pela Justiça</h2>
       <p class="project-desc">Mais de 40 pessoas são procuradas pela Justiça por pelo menos uma década na região de Sorocaba, segundo análise de dados do CNJ.</p>
@@ -813,23 +813,6 @@
     <div class="project-meta">
       <span class="project-date">Dez 2024</span>
       <span class="project-status">Publicado</span>
-    </div>
-  </button>
-
-  <button class="project-row reveal" data-modal="modal-music">
-    <span class="project-num">08</span>
-    <div class="project-main">
-      <h2 class="project-title">Análise de sentimento em músicas</h2>
-      <p class="project-desc">Código desenvolvido para anlisar atributos musicais - sentimento, energia, dançabilidade e tempo — utilizando a API do Spotify API para quantificar a emoção das músicas.</p>
-      <div class="project-tags">
-        <span class="tag">Python</span>
-        <span class="tag">Spotify API</span>
-        <span class="tag">Matplotlib</span>
-      </div>
-    </div>
-    <div class="project-meta">
-      <span class="project-date">Apr 2024</span>
-      <span class="project-status">Estudo</span>
     </div>
   </button>
 </section>
@@ -1117,24 +1100,6 @@
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-music">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 class="modal-title">Is My Music<br>Really Sad?</h2>
-      <button class="modal-close" data-close>Close ✕</button>
-    </div>
-    <div class="modal-body">
-      <p class="modal-desc">Usando a API do Spotify via Spotipy, extraí os atributos musicais de cada faixa — valência, energia e dançabilidade. Álbum analisado: <em style="color:var(--warm)">All We Know Is Falling</em>, do Paramore.</p>
-      <div class="modal-insight">"Franklin tem a menor valência do disco (0.21) — a música mais triste. Energia média: 0.87."</div>
-      <div class="modal-chart-wrap">
-        <span class="modal-chart-label">Danceability · Energy · Valence por faixa — Spotify API</span>
-        <div id="chart-music" style="margin-top:24px;overflow-x:auto;"></div>
-      </div>
-      <div class="modal-tags"><span class="tag">Python</span><span class="tag">Spotipy</span><span class="tag">Matplotlib</span><span class="tag">Seaborn</span></div>
-    </div>
-  </div>
-</div>
-
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── Cursor ──────────────────────────────────────
   const cursor = document.getElementById('cursor');
@@ -1291,21 +1256,6 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelect
     },
     'modal-wanted':{label:'Mandados pendentes — CNJ',stat:'53',statLabel:'mandados ha 10+ anos em Sorocaba',
       svg(){return svgBar2([7,31,4,8,1,1,1],[wf2(.45),wf2(.9),wf2(.5),wf2(.7),wf2(.32),wf2(.28),wf2(.24)],['10','11','12','13','14','15','16']);}
-    },
-    'modal-music':{label:'All We Know Is Falling — Paramore',stat:'0.21',statLabel:'valencia minima — Franklin',
-      svg(){
-        const valence=[0.37,0.46,0.32,0.56,0.21,0.54,0.36,0.53,0.66,0.42];
-        const energy=[0.91,0.93,0.91,0.94,0.69,0.85,0.80,0.88,0.89,0.93];
-        const n=valence.length,pw=W2-PAD2*2,ph=H2-PAD2*2-8;
-        const toX=i=>PAD2+i*(pw/(n-1));
-        const toY=v=>(H2-PAD2-8)-(v*ph);
-        let s='';
-        s+=`<polyline points="${energy.map((v,i)=>`${toX(i).toFixed(1)},${toY(v).toFixed(1)}`).join(' ')}" fill="none" stroke="rgba(80,190,160,0.45)" stroke-width="1.5" stroke-linejoin="round"/>`;
-        s+=`<polyline points="${valence.map((v,i)=>`${toX(i).toFixed(1)},${toY(v).toFixed(1)}`).join(' ')}" fill="none" stroke="${WARM_C}" stroke-width="1.8" stroke-linejoin="round"/>`;
-        s+=`<circle cx="${toX(4).toFixed(1)}" cy="${toY(0.21).toFixed(1)}" r="3.5" fill="${WARM_C}"/>`;
-        s+=`<text x="${toX(4).toFixed(1)}" y="${(toY(0.21)-5).toFixed(1)}" text-anchor="middle" font-size="6.5" fill="${WARM_C}" font-family="monospace">Franklin</text>`;
-        return s;
-      }
     }
   };
 
