@@ -657,14 +657,14 @@
 <!-- Hero -->
 <div class="hero">
   <div class="hero-bg-text"></div>
-  <p class="hero-tag">Analista de dados &amp; Storyteller — São Paulo, BR</p>
+  <p class="hero-tag">Analista de dados — São Paulo, BR</p>
   <h1 class="hero-title">
     Matheus Arruda
   </h1>
   <div class="hero-bottom">
     <p class="hero-role">
-      Analista de dados @ g1 - Globo <br>
-      Python & SQL · Visualização de dados · Machine Learning · BI
+      Analista de inteligência WEB @ g1, o portal de notícias da Globo <br>
+      Web Analytics, Análise e visualização de dados & Aprendizado de Máquinas
     </p>
     <div class="hero-scroll">
       <div class="hero-scroll-line"></div>
@@ -697,6 +697,26 @@
       <span class="project-status">Em produção</span>
     </div>
   </a>
+
+  <a class="project-row reveal" data-modal="Preview-Audience">
+    <span class="project-num">02</span>
+    <div class="project-main">
+      <h2 class="project-title">Previsão semanal de audiência</h2>
+      <p class="project-desc">Modelo de previsão de audiência semanal de um portal de notícias, com faixa de incerteza empírica de 80%. Clique para saber mais...</p>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Numpy</span>
+        <span class="tag">Matplotlib</span>
+        <span class="tag">Google Analytics API</span>
+      </div>
+    </div>
+    <div class="project-meta">
+      <span class="project-date">Out 2026</span>
+      <span class="project-status">Em produção</span>
+    </div>
+  </a>
+  
   
   <!-- 02–08 → modais -->
   <button class="project-row reveal" data-modal="modal-moneyball">
@@ -903,7 +923,7 @@
   </div>
   <div class="contact-inner">
     <div class="contact-links reveal">
-      <a class="contact-link" href="arrudamthh@gmail.com">E-mail</a>
+      <a class="contact-link" href="matheus.arruda4698@gmail.com">E-mail</a>
       <a class="contact-link" href="https://linkedin.com/in/matharruda" target="_blank">LinkedIn</a>
       <a class="contact-link" href="https://github.com/mtharruda" target="_blank">GitHub</a>
       <a class="contact-link" href="cv_ptbr.html" target="_blank">CV</a>
@@ -918,6 +938,31 @@
 </footer>
 
 <!-- ═══════════════════════ MODALS ═══════════════════════ -->
+<div class="modal-overlay" id="Preview-Audience">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title">Previsão semanal de audiência</h2>
+      <button class="modal-close" data-close>Close ✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc">Resultados (validação walk-forward, 54 semanas de teste):
+      <br>
+        - WAPE: ~23% <br>
+        - Viés: -2% <br>
+        - Cobertura da faixa: 80% <br>
+        
+      </p>
+      <div class="modal-insight">"OBP prediz vitórias melhor que payroll. Oakland provou isso em 2001 com a 3ª menor folha da MLB."</div>
+      <div class="modal-chart-wrap">
+        <span class="modal-chart-label">OBP vs. Vitórias — MLB (dados reais) + regressão linear</span>
+        <canvas id="chart-moneyball"></canvas>
+      </div>
+      <div class="modal-tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Scikit-Learn</span><span class="tag">Linear Regression</span></div>
+      <a class="modal-link" href="" target="_blank">Confira no GitHub</a>
+    </div>
+  </div>
+</div>
+
 
 <div class="modal-overlay" id="modal-moneyball">
   <div class="modal">
